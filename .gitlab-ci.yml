@@ -1,0 +1,9 @@
+image: ddavison/soapui
+
+before_script:
+  - echo "Nothing to do."
+
+test:
+  script:
+    - curl -F "project=@Q3-Training-Tests-soapui-project.xml" http://localhost:3000
+
