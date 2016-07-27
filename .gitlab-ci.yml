@@ -1,9 +1,10 @@
 image: ddavison/soapui
 
 before_script:
-  - echo "Nothing to do."
+  - npm install
+  - PORT=4000 node app.js &
 
 test:
   script:
-    - /opt/SoapUI/bin/testrunner.sh ./Q3-Training-Tests-soapui-project.xml
+    - /opt/SoapUI/bin/testrunner.sh -PPORT=4000 ./Q3-Training-Tests-soapui-project.xml
 
