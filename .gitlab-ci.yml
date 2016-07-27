@@ -5,5 +5,5 @@ before_script:
 
 test:
   script:
-    - curl -F "project=@Q3-Training-Tests-soapui-project.xml" http://localhost:3000
+    - /opt/SoapUI/bin/testrunner.sh ./Q3-Training-Tests-soapui-project.xml
 
