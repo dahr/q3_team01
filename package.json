@@ -1,0 +1,35 @@
+{
+  "name": "q3-training-tests",
+  "version": "1.0.0",
+  "description": "VMware DevOps Q3 2016 Training",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/vmware-devops/q3-training-tests.git"
+  },
+  "keywords": [
+    "Q3",
+    "micro",
+    "services",
+    "training"
+  ],
+  "author": "VMwareDevOps",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/vmware-devops/q3-training-tests/issues"
+  },
+  "homepage": "https://gitlab.com/vmware-devops/q3-training-tests#README",
+  "private": true,
+  "dependencies": {
+    "express": "^4.14.0",
+    "nodejs-model": "^0.1.6",
+    "pug": "^2.0.0-beta4"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}
