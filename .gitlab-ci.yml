@@ -1,9 +1,9 @@
 image: ddavison/soapui
 
 before_script:
-  - curl --silent --location https://rpm.nodesource.com/setup | bash -
-  - yum -y install nodejs
-  - yum -y install gcc-c++ make
+  - curl -sL https://deb.nodesource.com/setup_4.x | bash -
+  - apt-get install -y nodejs
+  - apt-get install -y build-essential
   - npm install
   - PORT=4000 node app.js &
 
