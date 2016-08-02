@@ -29,13 +29,13 @@ there is a REST server running with implementations to satisfy the tests.
 
 1. Install SoapUI
 
-  (Via GUI, or
-  ```
-  {downloaded package, e.g.}/Downloads/SoapUI-x64-5.2.1.sh -q -varfile {full-path-to-this-project}/SoapUI.varfile
-  ```
+   (Via GUI, or
+   ```
+   {downloaded package, e.g.}/Downloads/SoapUI-x64-5.2.1.sh -q -varfile {full-path-to-this-project}/SoapUI.varfile
+   ```
 
-2. Run the test suite: 
+2. Run the test suite:
 
-  ```
-  /usr/local/share/SoapUI-5.2.1/bin/testrunner.sh -PPORT=4000 ./Q3-Training-Tests-soapui-project.xml
-  ```
+   ```
+   /usr/local/share/SoapUI-5.2.1/bin/testrunner.sh -PPORT=3000 ./Q3-Training-Tests-soapui-project.xml
+   ```
