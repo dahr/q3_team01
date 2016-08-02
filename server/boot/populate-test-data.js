@@ -2,11 +2,11 @@
 // Node module: loopback-getting-started-intermediate
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
+'use strict';
 
 var async = require('async');
 
 module.exports = function(app) {
-
   var env = (process.env.NODE_ENV || 'development');
   var isDevEnv = env === 'development' || env === 'test';
   if (!isDevEnv) {
@@ -16,7 +16,7 @@ module.exports = function(app) {
   // create all models
   async.parallel({
     users: async.apply(createUsers),
-    servers: async.apply(createServers)
+    servers: async.apply(createServers),
   }, function(err, results) {
     if (err) throw err;
 
@@ -26,7 +26,7 @@ module.exports = function(app) {
   // create system users
   function createUsers(cb) {
     app.models.User.create([
-      {email: 'admin@vmware.com', password: 'adminpassword'}
+      {email: 'admin@vmware.com', password: 'adminpassword'},
     ], cb);
   }
 
@@ -35,7 +35,7 @@ module.exports = function(app) {
     app.models.Server.create([
       {name: 'server1'},
       {name: 'server2'},
-      {name: 'server3'}
+      {name: 'server3'},
     ], cb);
   }
 };

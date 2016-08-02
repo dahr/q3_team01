@@ -10,6 +10,5 @@ module.exports = {
   restApiRoot: GLOBAL_CONFIG.restApiRoot,
   livereload: process.env.LIVE_RELOAD,
   isDevEnv: isDevEnv,
-  port: port
+  port: port,
 };
-

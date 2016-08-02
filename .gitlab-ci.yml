@@ -9,5 +9,6 @@ before_script:
 
 test:
   script:
+    - npm test
     - /opt/SoapUI/bin/testrunner.sh -PPORT=4000 ./Q3-Training-Tests-soapui-project.xml
 

@@ -18,7 +18,7 @@ app.start = function() {
 };
 
 app.use('/express-status', function(req, res, next) {
-  res.json({ running: true });
+  res.json({running: true});
 });
 
 // Bootstrap the application, configure models, datasources and middleware.
