@@ -39,5 +39,9 @@
   "server": {
     "dataSource": "db",
     "public": true
+  },
+  "updater": {
+    "dataSource": "db",
+    "public": true
   }
 }

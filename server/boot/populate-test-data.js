@@ -17,6 +17,7 @@ module.exports = function(app) {
   async.parallel({
     users: async.apply(createUsers),
     servers: async.apply(createServers),
+    updates: async.apply(createUpdater),
   }, function(err, results) {
     if (err) throw err;
 
@@ -36,6 +37,13 @@ module.exports = function(app) {
       {name: 'server1'},
       {name: 'server2'},
       {name: 'server3'},
+    ], cb);
+  }
+
+  // create an updater entry
+  function createUpdater(cb) {
+    app.models.Updater.create([
+      {active: true},
     ], cb);
   }
 };
