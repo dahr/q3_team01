@@ -3,8 +3,8 @@
 module.exports = function(app, cb) {
   var delay = 5000;
 
-  var timeout_id = setInterval(function(){
-    app.models.Updater.checkForUpdates(function(){});
+  var timeoutId = setInterval(function() {
+    app.models.Updater.checkForUpdates(function() {});
   }, delay);
 
   /*
