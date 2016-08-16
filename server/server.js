@@ -28,5 +28,6 @@ boot(app, __dirname, function(err) {
 
   // start the server if `$ node server.js`
   if (require.main === module)
+    process.title = "q3trn";
     app.start();
 });

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node .",
     "pretest": "eslint .",
-    "posttest": "nsp check"
+    "posttest": "nsp check",
+    "stop": "killall -SIGINT q3trn"
   },
   "dependencies": {
     "async": "^0.9.0",
