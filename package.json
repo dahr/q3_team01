@@ -1,7 +1,7 @@
 {
   "name": "q3-training-tests",
   "version": "1.0.0",
-  "description": "VMware DevOps Q3 2016 Training Team01",
+  "description": "VMware DevOps Q3 2016 Training TeamXX",
   "main": "server/server.js",
   "scripts": {
     "start": "node .",
