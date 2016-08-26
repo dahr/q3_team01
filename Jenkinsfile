@@ -4,6 +4,10 @@
   sh 'npm install'
   sh 'npm test'
   sh 'echo $JOB_NAME'
+
+  stage 'REST Service Tests'
+  def teamId = env.JOB_NAME
+  sh 'echo $JOB_NAME'
  }
 
 //PORT=3990 npm start &
