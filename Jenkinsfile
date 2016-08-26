@@ -6,7 +6,8 @@
   sh 'echo $JOB_NAME'
 
   stage 'REST Service Tests'
-  def teamId = env.JOB_NAME
+  def teamId = env.JOB_NAME.split("-")[1]
+  echo "Running build for team " + teamId
   sh 'echo $JOB_NAME'
  }
 
