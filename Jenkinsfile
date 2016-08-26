@@ -9,10 +9,14 @@
   def teamId = env.JOB_NAME.split("-")[1].substring(4)
   def port = "31"+teamId
   echo "Running build for team " + teamId
-  sh 'PORT='+port+' npm start &'
-  sh 'sleep 5'
-  sh '/usr/local/share/SoapUI-5.2.1/bin/testrunner.sh -PTEAM='+teamId+' -PPORT='+port+' ./Q3-Training-Tests-soapui-project.xml'
-  sh 'npm stop'
+  try {
+    sh 'PORT='+port+' npm start &'
+    sh 'sleep 5'
+    sh '/usr/local/share/SoapUI-5.2.1/bin/testrunner.sh -PTEAM='+teamId+' -PPORT='+port+' ./Q3-Training-Tests-soapui-project.xml'
+  } finally {
+    stage 'Shutdown and Cleanup'
+    sh 'npm stop'
+  }
  }
 
 
