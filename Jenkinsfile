@@ -11,8 +11,8 @@
   echo "Running build for team " + teamId
   sh 'PORT='+port+' npm start &'
   sh 'sleep 5'
-  sh 'echo /usr/local/share/SoapUI-5.2.1/bin/testrunner.sh -PTEAM='+teamId+' -PPORT='+port+' ./Q3-Training-Tests-soapui-project.xml'
-  sh 'PORT='+port+' npm stop'
+  sh '/usr/local/share/SoapUI-5.2.1/bin/testrunner.sh -PTEAM='+teamId+' -PPORT='+port+' ./Q3-Training-Tests-soapui-project.xml'
+  sh 'npm stop'
  }
 
 
