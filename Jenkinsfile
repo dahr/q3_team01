@@ -1,5 +1,6 @@
  node ('master'){
-  stage 'Build and Test'
+  stage 'Build and Validate'
+  checkout scm
   sh 'npm install'
   sh 'npm test'
   sh 'echo $JOB_NAME'
