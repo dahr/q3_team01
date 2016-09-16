@@ -1,7 +1,7 @@
 var express = require('express')
     , router = express.Router();
 
-router.use('/approvables', require('./approvale'));
+router.use('/approvables', require('./approval'));
 
 router.get('/', function(req, res) {
     res.send('Some basic version info');

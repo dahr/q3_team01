@@ -2,7 +2,7 @@ var express = require('express'),
     router = express.Router(),
     config = require('../Config'),
     jsonUtils = require('../service/JsonUtils'),
-    approvalervice = require('../service/ApprovalService');
+    approvalService = require('../service/ApprovalService');
 
 router.get('/', function (req, res) {
 

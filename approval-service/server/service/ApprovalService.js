@@ -8,7 +8,7 @@ var express = require('express'),
 
 // for documentation on the appproval service used to store the approvals for the servers:
 /// http://approval.vmwaredevops.appspot.com/swagger/index.html
-var Approvalervice = {
+var Approvalservice = {
 
     urlBase: config.url.blobs,
     urlTeam: config.url.blobs + '/' + config.teamNumber,
@@ -17,4 +17,4 @@ var Approvalervice = {
 };
 
 
-module.exports = Approvalervice;
+module.exports = Approvalservice;
