@@ -1,0 +1,22 @@
+{
+  "name": "server-service",
+  "version": "1.0.0",
+  "description": "Microservice app for getting and creating servers",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "monitor": "nodemon server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Uwe Hale",
+  "license": "APACHE",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "multer": "^1.2.0",
+    "promise": "^7.1.1",
+    "request": "^2.74.0"
+  },
+  "devDependencies": {}
+}
