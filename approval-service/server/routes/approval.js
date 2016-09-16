@@ -1,12 +1,19 @@
 var express = require('express'),
     router = express.Router(),
-    config = require('../Config'),
-    jsonUtils = require('../service/JsonUtils'),
     approvalService = require('../service/ApprovalService');
 
 router.get('/', function (req, res) {
 
-    res.send('ok');
+    approvalService.getApprovals()
+        .then(
+            function(data){
+                console.log('Approvals Content' + JSON.stringify(data));
+                res.send(data);
+            },
+            function(error){
+                res.send(error);
+            }
+        );
 
 });
 
