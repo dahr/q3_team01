@@ -4,7 +4,7 @@ var express = require('express'),
     config = require('../Config'),
     jsonUtils = require('./JsonUtils'),
     errorHandler = require('./ErrorHandler'),
-    Blob = require('../models/Approval');
+    Approval = require('../models/Approval');
 
 // for documentation on the appproval service used to store the approvals for the servers:
 /// http://approval.vmwaredevops.appspot.com/swagger/index.html
@@ -13,7 +13,11 @@ var Approvalservice = {
     urlBase: config.url.approval,
     urlTeam: config.url.approval + config.teamParam,
 
-    getApprovals: function(){
+    /**
+     * Get all the approvals in an array
+     * @returns {*}
+     */
+    getApprovals: function () {
         var options = {
             url: this.urlTeam,
             method: 'GET'
@@ -24,13 +28,13 @@ var Approvalservice = {
             request(options, function (error, response, body) {
 
                 if (errorHandler.hasErrors(options, error, response)) {
-                    console.log('Error:'+ error);
+                    console.log('Error:' + error);
                     return reject(error);
                 }
 
                 var parsedResponse = jsonUtils.parseResponseBody(options, body);
                 if (parsedResponse.error) {
-                    console.log('Error:'+ parsedResponse.error);
+                    console.log('Error:' + parsedResponse.error);
                     return reject(parsedResponse.error);
                 }
 
@@ -39,8 +43,12 @@ var Approvalservice = {
         });
     },
 
-
-    getApprovalsById: function(approvalId){
+    /**
+     * Gets a single approval by ID
+     * @param approvalId
+     * @returns {*}
+     */
+    getApprovalsById: function (approvalId) {
         var options = {
             url: this.urlBase + '/' + approvalId + config.teamParam,
             method: 'GET'
@@ -51,19 +59,69 @@ var Approvalservice = {
             request(options, function (error, response, body) {
 
                 if (errorHandler.hasErrors(options, error, response)) {
-                    console.log('Error:'+ error);
+                    console.log('Error:' + error);
                     return reject(error);
                 }
 
                 var parsedResponse = jsonUtils.parseResponseBody(options, body);
                 if (parsedResponse.error) {
-                    console.log('Error:'+ parsedResponse.error);
+                    console.log('Error:' + parsedResponse.error);
                     return reject(parsedResponse.error);
                 }
 
                 resolve(parsedResponse.data);
             });
         });
+    },
+
+    /** add a single new server for approval
+     *
+     * Post Body:
+     * {
+     *   "name": "server5",
+     *   "from": "20160917",
+     *   "to": "20160917",
+     *   "user": "Richard Boswell",
+     *   "email": "rboswell@vmware.com"
+     * }
+     *
+     * @param newApproval
+     * @returns {*}
+     */
+    addApproval: function (serverInfo) {
+
+        var newApproval = new Approval();
+        newApproval.description = JSON.stringify(serverInfo);
+
+        var options = {
+            url: this.urlBase,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newApproval)
+        };
+
+        return new Promise(function (resolve, reject) {
+
+            request.post(options, function (error, response, body) {
+
+                if (errorHandler.hasErrors(options, error, response)) {
+                    console.log('Error:' + error);
+                    return reject(error);
+                }
+
+                var parsedResponse = jsonUtils.parseResponseBody(options, body);
+                if (parsedResponse.error) {
+                    console.log('Error:' + parsedResponse.error);
+                    return reject(parsedResponse.error);
+                }
+
+                resolve(parsedResponse.data);
+            });
+
+        });
+
     }
 
 };
