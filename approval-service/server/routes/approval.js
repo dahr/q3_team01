@@ -3,7 +3,6 @@ var express = require('express'),
     approvalService = require('../service/ApprovalService');
 
 router.get('/', function (req, res) {
-
     approvalService.getApprovals()
         .then(
             function(data){
@@ -14,7 +13,19 @@ router.get('/', function (req, res) {
                 res.send(error);
             }
         );
+});
 
+router.get('/:id', function (req, res) {
+    approvalService.getApprovalsById(req.param('id'))
+        .then(
+            function(data){
+                console.log('Approvals Content' + JSON.stringify(data));
+                res.send(data);
+            },
+            function(error){
+                res.send(error);
+            }
+        );
 });
 
 

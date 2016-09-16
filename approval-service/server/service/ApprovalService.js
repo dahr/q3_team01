@@ -18,7 +18,34 @@ var Approvalservice = {
             url: this.urlTeam,
             method: 'GET'
         };
-        
+
+        return new Promise(function (resolve, reject) {
+
+            request(options, function (error, response, body) {
+
+                if (errorHandler.hasErrors(options, error, response)) {
+                    console.log('Error:'+ error);
+                    return reject(error);
+                }
+
+                var parsedResponse = jsonUtils.parseResponseBody(options, body);
+                if (parsedResponse.error) {
+                    console.log('Error:'+ parsedResponse.error);
+                    return reject(parsedResponse.error);
+                }
+
+                resolve(parsedResponse.data);
+            });
+        });
+    },
+
+
+    getApprovalsById: function(approvalId){
+        var options = {
+            url: this.urlBase + '/' + approvalId + config.teamParam,
+            method: 'GET'
+        };
+
         return new Promise(function (resolve, reject) {
 
             request(options, function (error, response, body) {
