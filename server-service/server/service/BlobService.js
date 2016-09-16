@@ -31,14 +31,13 @@ var BlobService = {
 
             request(options, function (error, response, body) {
 
-                if (errorHandler.hasErrors(options, error, response)) {
-                    console.log('Error:'+ error);
-                    return reject(error);
+                var errorsFound = errorHandler.hasErrors(options, error, response);
+                if (errorsFound) {
+                    return reject(errorsFound);
                 }
 
                 var parsedResponse = jsonUtils.parseResponseBody(options, body);
                 if (parsedResponse.error) {
-                    console.log('Error:'+ parsedResponse.error);
                     return reject(parsedResponse.error);
                 }
 
@@ -71,14 +70,13 @@ var BlobService = {
 
             request.post(options, function (error, response, body) {
 
-                if (errorHandler.hasErrors(options, error, response)) {
-                    console.log('Error:'+ error);
-                    return reject(error);
+                var errorsFound = errorHandler.hasErrors(options, error, response);
+                if (errorsFound) {
+                    return reject(errorsFound);
                 }
 
                 var parsedResponse = jsonUtils.parseResponseBody(options, body);
                 if (parsedResponse.error) {
-                    console.log('Error:'+ parsedResponse.error);
                     return reject(parsedResponse.error);
                 }
 
