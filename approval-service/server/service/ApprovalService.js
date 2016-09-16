@@ -85,7 +85,7 @@ var Approvalservice = {
      *   "email": "rboswell@vmware.com"
      * }
      *
-     * @param newApproval
+     * @param serverInfo
      * @returns {*}
      */
     addApproval: function (serverInfo) {
@@ -119,10 +119,40 @@ var Approvalservice = {
 
                 resolve(parsedResponse.data);
             });
-
         });
+    },
 
+    /**
+     * Delete a single approval by ID
+     *
+     * @param approvalId
+     * @returns {*}
+     */
+    deleteApprovalsById: function (approvalId) {
+        var options = {
+            url: this.urlBase + '/' + approvalId,
+            method: 'DELETE'
+        };
+
+        return new Promise(function (resolve, reject) {
+
+            request.delete(options, function (error, response, body) {
+
+                var errorsFound = errorHandler.hasErrors(options, error, response);
+                if (errorsFound) {
+                    return reject(errorsFound);
+                }
+
+                var parsedResponse = jsonUtils.parseResponseBody(options, body);
+                if (parsedResponse.error) {
+                    return reject(parsedResponse.error);
+                }
+
+                resolve(parsedResponse.data);
+            });
+        });
     }
+
 
 };
 

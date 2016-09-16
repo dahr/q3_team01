@@ -2,11 +2,14 @@ var express = require('express'),
     router = express.Router(),
     approvalService = require('../service/ApprovalService');
 
+/**
+ * get an array of approvals
+ */
 router.get('/', function (req, res) {
     approvalService.getApprovals()
         .then(
             function (data) {
-                console.log('Approvals Content' + JSON.stringify(data));
+                console.log('Approvals List' + JSON.stringify(data));
                 res.send(data);
             },
             function (error) {
@@ -15,11 +18,14 @@ router.get('/', function (req, res) {
         );
 });
 
+/**
+ * get a single approval by ID
+ */
 router.get('/:id', function (req, res) {
     approvalService.getApprovalsById(req.param('id'))
         .then(
             function (data) {
-                console.log('Approvals Content' + JSON.stringify(data));
+                console.log('Approval ' + JSON.stringify(data));
                 res.send(data);
             },
             function (error) {
@@ -54,5 +60,22 @@ router.post('/', function (req, res) {
         );
 
 });
+
+/**
+ * delete a single approval by ID
+ */
+router.delete('/:id', function (req, res) {
+    approvalService.deleteApprovalsById(req.param('id'))
+        .then(
+            function (data) {
+                console.log('Approvals Deleted' + JSON.stringify(data));
+                res.send(data);
+            },
+            function (error) {
+                res.send(error);
+            }
+        );
+});
+
 
 module.exports = router;
