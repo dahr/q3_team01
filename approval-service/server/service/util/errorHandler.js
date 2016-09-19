@@ -1,6 +1,6 @@
 var     Promise = require('promise')
 
-var ErrorHandler = {
+var errorHandler = {
 
     hasErrors: function(options, error, response){
 
@@ -20,4 +20,4 @@ var ErrorHandler = {
 
 };
 
-module.exports = ErrorHandler;
+module.exports = errorHandler;

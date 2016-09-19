@@ -1,6 +1,9 @@
 var express = require('express'),
     router = express.Router(),
-    approvalService = require('../service/ApprovalService');
+    approvalService = require('../service/approvalService'),
+    ApprovablesResponseException = require('../models/approvables/ApprovablesResponseException'),
+    ApprovalRequestException = require('../models/approval/ApprovalRequestException'),
+    ApprovalRequest = require('../models/approval/ApprovalRequest');
 
 /**
  * get an array of approvals
@@ -13,7 +16,7 @@ router.get('/', function (req, res) {
                 res.send(data);
             },
             function (error) {
-                res.send(error);
+                return res.status(500).send(error);
             }
         );
 });
@@ -22,6 +25,7 @@ router.get('/', function (req, res) {
  * get a single approval by ID
  */
 router.get('/:id', function (req, res) {
+
     approvalService.getApprovalsById(req.param('id'))
         .then(
             function (data) {
@@ -29,9 +33,10 @@ router.get('/:id', function (req, res) {
                 res.send(data);
             },
             function (error) {
-                res.send(error);
+                return res.status(500).send(error);
             }
         );
+
 });
 
 /** add a single new server for approval
@@ -39,8 +44,7 @@ router.get('/:id', function (req, res) {
  * Post Body:
  * {
  *   "name": "server5",
- *   "from": "20160917",
- *   "to": "20160917",
+ *   "date": "20160917",
  *   "user": "Richard Boswell",
  *   "email": "rboswell@vmware.com"
  * }
@@ -48,17 +52,30 @@ router.get('/:id', function (req, res) {
  */
 router.post('/', function (req, res) {
 
-    approvalService.addApproval(req.body)
-        .then(
-            function (data) {
-                console.log('Saved Approval' + JSON.stringify(data));
-                res.send(data);
-            },
-            function (error) {
-                res.send(error);
-            }
-        );
+    try {
+        var approvalRequest = new ApprovalRequest(req.body);
 
+        approvalService.addApproval(approvalRequest)
+            .then(
+                function (data) {
+                    console.log('Saved Approval' + JSON.stringify(data));
+                    res.send(data);
+                },
+                function (error) {
+                    return res.status(500).send(error);
+                }
+            );
+
+    } catch (exception) {
+        if (exception instanceof ApprovalRequestException) {
+            return res.status(400).send(exception);
+        } else {
+            console.log('Unknown Error:' + exception);
+            return res.status(500).send(exception);
+
+        }
+
+    }
 });
 
 /**
@@ -72,7 +89,7 @@ router.delete('/:id', function (req, res) {
                 res.send(data);
             },
             function (error) {
-                res.send(error);
+                return res.status(500).send(error);
             }
         );
 });

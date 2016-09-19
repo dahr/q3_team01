@@ -1,8 +1,8 @@
-var config = require('../Config');
+var config = require('../../Config');
 
 
 
-var Approvable = function () {
+var approval = function () {
     this.id = 0;
     this.teamID = parseInt(config.teamNumber);
     this.blob = 0;
@@ -13,7 +13,7 @@ var Approvable = function () {
 };
 
 
-Approvable.prototype.clone = function (other) {
+approval.prototype.clone = function (other) {
     this.id = other.id;
     this.teamID = other.teamID;
     this.blob = other.blob;
@@ -24,4 +24,4 @@ Approvable.prototype.clone = function (other) {
 
 
 
-module.exports = Approvable;
+module.exports = approval;

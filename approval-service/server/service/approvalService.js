@@ -2,13 +2,16 @@ var express = require('express'),
     Promise = require('promise'),
     request = require('request'),
     config = require('../Config'),
-    jsonUtils = require('./JsonUtils'),
-    errorHandler = require('./ErrorHandler'),
-    Approval = require('../models/Approval');
+    jsonUtils = require('./util/JsonUtils'),
+    errorHandler = require('./util/errorHandler'),
+    ApprovablesResponseException = require('../models/approvables/ApprovablesResponseException'),
+    ParseException = require('./util/ParseException'),
+    approvablesResponseValidator = require('../models/approvables/approvablesResponseValidator'),
+    Approval = require('../models/approval/Approval');
 
 // for documentation on the appproval service used to store the approvals for the servers:
 /// http://approval.vmwaredevops.appspot.com/swagger/index.html
-var Approvalservice = {
+var approvalService = {
 
     urlBase: config.url.approval,
     urlTeam: config.url.approval + config.teamParam,
@@ -38,11 +41,30 @@ var Approvalservice = {
                 }
 
                 // convert the text description to json
-                parsedResponse.data.forEach(function(approvalResponse){
-                   approvalResponse.description = jsonUtils.parseEncodedString(approvalResponse.description);
-                });
+                var convertedResponse = [];
+                parsedResponse.data.forEach(function (approvalResponse) {
 
-                resolve(parsedResponse.data);
+                        try {
+                            if (approvalResponse.description) {
+                                approvalResponse.description = jsonUtils.parseEncodedString(approvalResponse.description);
+                            }
+                            // filter out bad data
+                            approvablesResponseValidator.validate(approvalResponse);
+                            convertedResponse.push(approvalResponse);
+                        } catch (e) {
+                            if (e instanceof ApprovablesResponseException) {
+                                console.log(e + '\nIgnoring Invalid Approval:' + JSON.stringify(approvalResponse));
+                            } else if (e instanceof ParseException) {
+                                console.log(e + '\nUnable to parse approvables payload:' + JSON.stringify(approvalResponse));
+                            } else {
+                                throw e;
+                            }
+
+                        }
+                    }
+                );
+
+                resolve(convertedResponse);
             });
         });
     },
@@ -72,7 +94,25 @@ var Approvalservice = {
                     return reject(parsedResponse.error);
                 }
 
-                resolve(parsedResponse.data);
+                var approvableResponse = parsedResponse.data;
+
+                try {
+                    if (approvableResponse.description) {
+                        approvableResponse.description = jsonUtils.parseEncodedString(approvableResponse.description);
+                    }
+                    // filter out bad data
+                    approvablesResponseValidator.validate(approvableResponse);
+                } catch (e) {
+                    if (e instanceof ApprovablesResponseException) {
+                        console.log(e + '\nIgnoring Invalid Approval:' + JSON.stringify(approvableResponse));
+                    } else if (e instanceof ParseException) {
+                        console.log(e + '\nUnable to parse approvables payload:' + JSON.stringify(approvableResponse));
+                    }
+                    return reject(e);
+
+                }
+
+                resolve(approvableResponse);
             });
         });
     },
@@ -82,8 +122,7 @@ var Approvalservice = {
      * Post Body:
      * {
      *   "name": "server5",
-     *   "from": "20160917",
-     *   "to": "20160917",
+     *   "date": "20160917",
      *   "user": "Richard Boswell",
      *   "email": "rboswell@vmware.com"
      * }
@@ -119,6 +158,8 @@ var Approvalservice = {
                 if (parsedResponse.error) {
                     return reject(parsedResponse.error);
                 }
+
+                parsedResponse.data.description = jsonUtils.parseEncodedString(parsedResponse.data.description);
 
                 resolve(parsedResponse.data);
             });
@@ -160,4 +201,4 @@ var Approvalservice = {
 };
 
 
-module.exports = Approvalservice;
+module.exports = approvalService;
