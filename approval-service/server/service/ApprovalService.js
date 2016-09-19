@@ -37,6 +37,11 @@ var Approvalservice = {
                     return reject(parsedResponse.error);
                 }
 
+                // convert the text description to json
+                parsedResponse.data.forEach(function(approvalResponse){
+                   approvalResponse.description = jsonUtils.parseEncodedString(approvalResponse.description);
+                });
+
                 resolve(parsedResponse.data);
             });
         });
@@ -90,6 +95,7 @@ var Approvalservice = {
 
         var newApproval = new Approval();
         newApproval.description = JSON.stringify(serverInfo);
+        newApproval.blob = parseInt(serverInfo.date);
 
         var options = {
             url: this.urlBase,
