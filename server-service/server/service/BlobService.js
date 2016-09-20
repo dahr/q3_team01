@@ -2,9 +2,9 @@ var express = require('express'),
     Promise = require('promise'),
     request = require('request'),
     config = require('../Config'),
-    jsonUtils = require('./JsonUtils'),
-    errorHandler = require('./ErrorHandler'),
-    Blob = require('../models/Blob');
+    jsonUtils = require('./util/JsonUtils'),
+    errorHandler = require('./util/ErrorHandler'),
+    Blob = require('../models/blob/Blob');
 
 // for documentation on the blob service used to store the servers for the lab:
 // http://blobs.vmwaredevops.appspot.com/swagger/index.html#/
@@ -41,6 +41,9 @@ var BlobService = {
                     return reject(parsedResponse.error);
                 }
 
+                // convert string content to json ojbect
+                parsedResponse.data.content = jsonUtils.parseEncodedString(parsedResponse.data.content);
+
                 resolve(parsedResponse.data);
             });
         });
@@ -48,14 +51,22 @@ var BlobService = {
 
 
     /**
-     * adds a new server to the blob service
-     * @param serverData
+     * Adds a new new server to the blob lab list
+     * checks for duplicates
+     *
+     * @param currentData
+     * @param newServer
+     * @returns {*}
      */
+
     addServer: function (currentData, newServer) {
 
         var newBlob = new Blob();
         newBlob.clone(currentData);
         newBlob.addServer(newServer);
+
+        // set content to string before saving
+        newBlob.content = JSON.stringify(newBlob.content);
 
         var options = {
             url: this.urlBase,
@@ -79,6 +90,9 @@ var BlobService = {
                 if (parsedResponse.error) {
                     return reject(parsedResponse.error);
                 }
+
+                // convert string content to json ojbect
+                parsedResponse.data.content = jsonUtils.parseEncodedString(parsedResponse.data.content);
 
                 resolve(parsedResponse.data);
             });

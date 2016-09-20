@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server/server.js",
     "monitor": "nodemon server/server.js",
+    "debug": "node  --debug-brk=5858 server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Uwe Hale",

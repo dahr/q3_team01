@@ -1,8 +1,6 @@
-var     Promise = require('promise')
-
 var ErrorHandler = {
 
-    hasErrors: function(options, error, response){
+    hasErrors: function (options, error, response) {
 
         if (error) {
             console.log('Error:', error);

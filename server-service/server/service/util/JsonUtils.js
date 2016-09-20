@@ -1,3 +1,5 @@
+var ParseException =require('./ParseException');
+
 var JsonUtils = {
     parseResponseBody: function (options, body) {
         var parsedResponse = {data: '', error: null};
@@ -13,10 +15,14 @@ var JsonUtils = {
     },
 
     parseEncodedString: function (encodedString) {
+        if(!encodedString){
+            return [];
+        }
+
         try {
             return JSON.parse(encodedString.replace(/&#34;/g, '\"'));
         } catch (e) {
-            console.log('Error' + e);
+            throw new ParseException('Error Decoding:' + encodedString + '\n' + e)
         }
     }
 
