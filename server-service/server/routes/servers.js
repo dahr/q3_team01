@@ -6,7 +6,9 @@ var express = require('express'),
     ServerDuplicateRequestException = require('../models/server/ServerRequestDuplicateException'),
     ServerRequestNotFoundException = require('../models/server/ServerRequestNotFoundException');
 
-
+/**
+ * Returns an array of all the servers that are configured for the lab
+ */
 router.get('/', function (req, res) {
 
     blobService.getServers()
@@ -23,7 +25,14 @@ router.get('/', function (req, res) {
 
 });
 
-
+/**
+ * Adds a server to the lab data
+ *
+ * {
+ *   "name": "server2",  // mandatory
+ *   "description": "Another server"  // this and other info is optional
+ * }
+ */
 router.post('/', function (req, res) {
 
     // get the server data for the current labs
@@ -67,7 +76,11 @@ router.post('/', function (req, res) {
 
 });
 
-
+/**
+ * Delete a server from the lab server list
+ *
+ * the servername is passed on the URL
+ */
 router.delete('/:name', function (req, res) {
 
     // get the server data for the current labs
