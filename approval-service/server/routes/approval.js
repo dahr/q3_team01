@@ -3,6 +3,7 @@ var express = require('express'),
     approvalService = require('../service/approvalService'),
     ApprovablesResponseException = require('../models/approvables/ApprovablesResponseException'),
     ApprovalRequestException = require('../models/approval/ApprovalRequestException'),
+    ApprovalRequestDuplicateException = require('../models/approval/ApprovalRequestDuplicateException'),
     ApprovalRequest = require('../models/approval/ApprovalRequest');
 
 /**
@@ -53,28 +54,43 @@ router.get('/:id', function (req, res) {
 router.post('/', function (req, res) {
 
     try {
-        var approvalRequest = new ApprovalRequest(req.body);
 
-        approvalService.addApproval(approvalRequest)
-            .then(
-                function (data) {
-                    console.log('Saved Approval' + JSON.stringify(data));
-                    res.send(data);
-                },
-                function (error) {
-                    return res.status(500).send(error);
+        approvalService.getApprovals()
+            .then(function (currentApprovals) {
+
+                try {
+
+                    var approvalRequest = new ApprovalRequest(req.body);
+
+                    approvalService.checkForDuplicates(currentApprovals, approvalRequest);
+
+                    approvalService.addApproval(approvalRequest)
+                        .then(
+                            function (data) {
+                                console.log('Saved Approval' + JSON.stringify(data));
+                                res.send(data);
+                            },
+                            function (error) {
+                                return res.status(500).send(error);
+                            }
+                        );
+                } catch (exception) {
+                    if (exception instanceof ApprovalRequestDuplicateException) {
+                        return res.status(400).send(exception);
+                    } else if (exception instanceof ApprovalRequestException) {
+                        return res.status(400).send(exception);
+                    } else {
+                        console.log('Unknown Error:' + exception);
+                        return res.status(500).send(exception);
+                    }
+
                 }
-            );
+            })
+
 
     } catch (exception) {
-        if (exception instanceof ApprovalRequestException) {
-            return res.status(400).send(exception);
-        } else {
-            console.log('Unknown Error:' + exception);
-            return res.status(500).send(exception);
-
-        }
-
+        console.log('Unknown Error:' + exception);
+        return res.status(500).send(exception);
     }
 });
 

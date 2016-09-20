@@ -5,6 +5,7 @@ var express = require('express'),
     jsonUtils = require('./util/JsonUtils'),
     errorHandler = require('./util/errorHandler'),
     ApprovablesResponseException = require('../models/approvables/ApprovablesResponseException'),
+    ApprovalRequestDuplicateException = require('../models/approval/ApprovalRequestDuplicateException'),
     ParseException = require('./util/ParseException'),
     approvablesResponseValidator = require('../models/approvables/approvablesResponseValidator'),
     Approval = require('../models/approval/Approval');
@@ -195,6 +196,23 @@ var approvalService = {
                 resolve(parsedResponse.data);
             });
         });
+    },
+
+
+
+    checkForDuplicates: function (currentApprovals, serverInfo) {
+
+        var newApproval = new Approval();
+        newApproval.description = JSON.stringify(serverInfo);
+        newApproval.blob = parseInt(serverInfo.date);
+
+        currentApprovals.forEach(function (approval) {
+            if (approval.blob === newApproval.blob && approval.name === newApproval.description.name) {
+                var error = 'Server tst is already being used:' + JSON.stringify(approval);
+                throw new ApprovalRequestDuplicateException(approval);
+            }
+        });
+
     }
 
 
