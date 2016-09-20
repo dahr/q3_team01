@@ -98,8 +98,56 @@ var BlobService = {
             });
 
         });
+    },
 
 
+    /**
+     * Deletes the server from the lab list and updates the blob service
+     *
+     * @param currentData
+     * @param serverName
+     * @returns {*}
+     */
+    deleteServerByName: function (currentData, serverName) {
+
+        var newBlob = new Blob();
+        newBlob.clone(currentData);
+        newBlob.deleteServer(serverName);
+
+        // set content to string before saving
+        newBlob.content = JSON.stringify(newBlob.content);
+
+        var options = {
+            url: this.urlBase,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newBlob)
+        };
+
+        return new Promise(function (resolve, reject) {
+
+            request.post(options, function (error, response, body) {
+
+                var errorsFound = errorHandler.hasErrors(options, error, response);
+                if (errorsFound) {
+                    return reject(errorsFound);
+                }
+
+                var parsedResponse = jsonUtils.parseResponseBody(options, body);
+                if (parsedResponse.error) {
+                    return reject(parsedResponse.error);
+                }
+
+                // convert string content to json ojbect
+                //noinspection JSPrimitiveTypeWrapperUsage
+                parsedResponse.data.content = jsonUtils.parseEncodedString(parsedResponse.data.content);
+
+                resolve(parsedResponse.data);
+            });
+
+        });
     }
 
 };

@@ -1,5 +1,6 @@
 var config = require('../../Config'),
-    ServerRequestDuplicateException = require('../server/ServerRequestDuplicateException');
+    ServerRequestDuplicateException = require('../server/ServerRequestDuplicateException'),
+    ServerRequestNotFoundException = require('../server/ServerRequestNotFoundException');
 
 
 var Blob = function () {
@@ -32,8 +33,30 @@ Blob.prototype.addServer = function (newServer) {
 
     // if not exist, add it to the array
     this.content.push(newServer);
-
-
 };
+
+
+Blob.prototype.deleteServer = function (serverName) {
+
+    var updatedArray = [];
+    var found = false;
+    // see if server already exists
+    this.content.forEach(function (srv) {
+        if (srv.name === serverName) {
+           found = true;
+        }else{
+            updatedArray.push(srv);
+        }
+
+    });
+
+    if(!found){
+        throw new ServerRequestNotFoundException(serverName);
+    }
+
+    // Set the content to the array without the deleted server
+    this.content = updatedArray;
+};
+
 
 module.exports = Blob;
