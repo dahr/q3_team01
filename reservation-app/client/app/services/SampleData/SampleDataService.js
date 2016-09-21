@@ -13,7 +13,7 @@ angular.module('nea.services.sampledata', [])
 
     this.getSampleData = function() {
 
-        return $http.get('/api/nea/servers').then(function(response) {
+        return $http.get('/api/reservations').then(function(response) {
             return response.data;
         });
     };

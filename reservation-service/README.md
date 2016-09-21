@@ -81,9 +81,8 @@ npm run monitor
 
 ## Service
 
-Api (port 8081 for dev, 8093 for Dockerfile)
 ```
-[GET, POST] http://localhost:{PORT)/api/reservations
+[GET, POST] http://localhost:{8093/api/reservations
 ```
 
 

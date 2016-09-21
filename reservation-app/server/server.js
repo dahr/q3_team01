@@ -2,12 +2,12 @@ var express = require('express');
 var path = require('path');
 
 var app = express();
-app.use('/app/nea', express.static(path.join(__dirname, '../public'))); //  "public" off of current is root
+app.use('/app', express.static(path.join(__dirname, '../public'))); //  "public" off of current is root
 
-app.use('/api/nea', require('./routes'));
+app.use('/api', require('./routes'));
 
 
-var server = app.listen(8081, function () {
+var server = app.listen(8090, function () {
 
     var host = server.address().address;
     var port = server.address().port;

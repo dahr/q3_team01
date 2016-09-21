@@ -13,4 +13,5 @@ project_dir=$(dirname $(dirname "${BASH_SOURCE[0]}"))
 
 echo Starting ${service_name} Docker image for ${TEAM} from ${project_dir} on Port:${SERVER_SERVICE_PORT}
 
-docker run -p${SERVER_SERVICE_PORT}:8081 --name "${TEAM}-${service_name}" -d ${TEAM}/${service_name}
+docker run  -p${SERVER_SERVICE_PORT}:8091 --name "${TEAM}-${service_name}" -d ${TEAM}/${service_name}
+

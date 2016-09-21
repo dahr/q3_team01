@@ -76,7 +76,7 @@ npm run monitor
 
 Api (port 8081 for dev, 8091 for Dockerfile)
 ```
-[GET, POST] http://localhost:{PORT)/api/servers
+[GET, POST] http://localhost:8091/api/servers
 ```
 
 

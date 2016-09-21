@@ -26,6 +26,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "multer": "^1.2.0",
+    "promise": "^7.1.1",
     "request": "^2.74.0",
     "yargs": "^5.0.0"
   },
@@ -43,3 +44,4 @@
     "main-bower-files": "^2.13.1"
   }
 }
+

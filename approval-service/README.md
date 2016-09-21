@@ -74,9 +74,8 @@ npm run monitor
 
 ## Service
 
-Api (port 8081 for dev, 8092 for Dockerfile)
 ```
-[GET, POST] http://localhost:{PORT)/api/approvables
+[GET, POST] http://localhost:8093/api/approvables
 ```
 
 

@@ -10,7 +10,7 @@ RUN npm run clean
 
 RUN npm install
 
-EXPOSE 8091
+EXPOSE 8093
 
 CMD [ "npm", "start"]
 
