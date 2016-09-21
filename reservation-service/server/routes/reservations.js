@@ -1,11 +1,14 @@
 var express = require('express'),
     router = express.Router(),
+    Reservation = require('../models/reservation/Reservation'),
+    ReservationRequestException = require('../models/reservation/ReservationRequestException'),
     reservationService = require('../service/reservationService');
 
 /**
  * get an array of reservations
  */
 router.get('/', function (req, res) {
+
     reservationService.getReservations()
         .then(
             function (data) {
@@ -17,6 +20,39 @@ router.get('/', function (req, res) {
             }
         );
 });
+
+/**
+ * create a reservation
+ */
+router.post('/', function (req, res) {
+
+    try{
+        var reservation = new Reservation(req.body);
+
+        reservationService.createReservation(reservation)
+            .then(
+                function (data) {
+                    console.log('Created Reservation ' + JSON.stringify(data));
+                    res.send(data);
+                },
+                function (error) {
+                    return res.status(500).send(error);
+                }
+            );
+
+    } catch (e) {
+        if (e instanceof ReservationRequestException) {
+            return res.status(400).send(e);
+        } else {
+            console.log('Unknown Error:' + e);
+            return res.status(500).send(e);
+        }
+
+    }
+
+
+});
+
 
 
 module.exports = router;

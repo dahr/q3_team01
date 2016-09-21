@@ -6,6 +6,8 @@ WORKDIR /home/app
 
 COPY . /home/app
 
+RUN npm run clean
+
 RUN npm install
 
 EXPOSE 8091
