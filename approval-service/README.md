@@ -24,16 +24,21 @@ environment.
 ```
 git clone ssh://${LOGNAME}@gerrit.eng.vmware.com:29418/q3-team06 && scp -p -P 29418 ${LOGNAME}@gerrit.eng.vmware.com:hooks/commit-msg q3-team06/.git/hooks/
 ```
-## Build and Run 
-You can now build and run the app in a docker container using the Dockerfile.
-Don't leave out that period at the end of the build command.
+
+## Build, Run, and Stop
+You can now build and run the app in a docker container using the Dockerfile. 
+See contents of bash scripts for examples to manually run docker commands
 
 ```
-docker build -t ${LOGNAME}/approval-service .
+./bin/dockerServiceBuild.sh
 ```
 
 ```
-docker run -p8092:8081 -d ${LOGNAME}/approval-service
+./bin/dockerServiceRun.sh
+```
+
+```
+./bin/dockerServiceStop.sh
 ```
 
 

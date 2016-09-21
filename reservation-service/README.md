@@ -20,20 +20,32 @@ environment.
  *might need to run under sudo
  *might need modification to your path
 
+## Dependencies
+
+- server-service (run in docker on port 8091)
+- approval-service (run in docker on port 8092)
+
+You can build and start each of these using the build and run bash scripts in each projects
+bin subdirectory.
+
 ## Get the Source Code
 ```
 git clone ssh://${LOGNAME}@gerrit.eng.vmware.com:29418/q3-team06 && scp -p -P 29418 ${LOGNAME}@gerrit.eng.vmware.com:hooks/commit-msg q3-team06/.git/hooks/
 ```
-## Build and Run 
-You can now build and run the app in a docker container using the Dockerfile.
-Don't leave out that period at the end of the build command.
+## Build, Run, and Stop
+You can now build and run the app in a docker container using the Dockerfile. 
+See contents of bash scripts for examples to manually run docker commands
 
 ```
-docker build -t ${LOGNAME}/reservation-service .
+./bin/dockerServiceBuild.sh
 ```
 
 ```
-docker run -p8093:8081 -d ${LOGNAME}/reservation-service
+./bin/dockerServiceRun.sh
+```
+
+```
+./bin/dockerServiceStop.sh
 ```
 
 
