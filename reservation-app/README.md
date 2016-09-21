@@ -1,7 +1,7 @@
-server-service
-==============
+reservation-app
+======================
 
-Node, Express Microservice system for handling the lab servers" 
+Node, Express AngularJS User Interface application for handling the lab servers" 
 
 
 ## Prerequisties
@@ -29,16 +29,19 @@ git clone ssh://${LOGNAME}@gerrit.eng.vmware.com:29418/q3-team06 && scp -p -P 29
 You can now build and run the app in a docker container using the Dockerfile. 
 See contents of bash scripts for examples to manually run docker commands
 
+
+http://localhost:8090/app/nea
+
 ```
-./bin/dockerServiceBuild.sh
+./bin/dockerAppBuild.sh
 ```
 
 ```
-./bin/dockerServiceRun.sh
+./bin/dockerAppRun.sh
 ```
 
 ```
-./bin/dockerServiceStop.sh
+./bin/dockerAppStop.sh
 ```
 
 
@@ -52,31 +55,3 @@ Run the node package manager install script.  This will download all node depend
 ```
 npm install
 ```
-
-## Startup
-
-There are several npm run tasks defined in the 'scripts' section of
-package.json.  Some are for the UI client code and others for the node 
-express server code
-
-**Start** - This will start the node server 
-```
-npm start
-```
-
-**Monitor** - will use nodemon instead of node to automatically restart
-the node server when any files are changed during development.  It requires
-[nodemon](http://nodemon.io) to be installed in your development environment.
-```
-npm run monitor
-```
-
-
-## Service
-
-Api (port 8081 for dev, 8091 for Dockerfile)
-```
-[GET, POST] http://localhost:{PORT)/api/servers
-```
-
-

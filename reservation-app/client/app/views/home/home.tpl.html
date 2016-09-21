@@ -1,0 +1,22 @@
+<div>
+
+    <div>
+        Some data from the controller
+
+        <table ng-table="vm.tableParams" class="table" show-filter="true">
+            <tr ng-repeat="server in vm.data">
+                <td title="'Code'" filter="{ code: 'text'}" sortable="'code'">
+                    {{server.code}}</td>
+                <td title="'Location'" filter="{ location: 'text'}" sortable="'location'">
+                    {{server.location}}</td>
+                <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
+                    {{server.name}}</td>
+                </tr>
+        </table>
+
+        <p>{{vm.data}}</p>
+    </div>
+
+
+
+</div>

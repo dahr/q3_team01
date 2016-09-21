@@ -10,4 +10,6 @@ ${project_dir}/server-service/bin/dockerServiceStop.sh
 ${project_dir}/approval-service/bin/dockerServiceStop.sh
 ${project_dir}/reservation-service/bin/dockerServiceStop.sh
 
+${project_dir}/reservation-app/bin/dockerAppStop.sh
+
 

@@ -11,6 +11,8 @@ echo "**************** Try Me ****************"
 echo "http://localhost:8091/api/servers"
 echo "http://localhost:8092/api/approvables"
 echo "http://localhost:8093/api/reservations"
+echo
+echo "http://localhost:8090/app/reservations"
 echo ""
 echo "run dockerStop.sh to stop and remove the containers"
 echo ""
