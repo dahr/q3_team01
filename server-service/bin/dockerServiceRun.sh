@@ -9,7 +9,7 @@ if [ -z ${TEAM} ]; then TEAM="team6";fi
 if [ -z ${SERVER_SERVICE_PORT} ]; then SERVER_SERVICE_PORT=${default_port};fi
 
 
-project_dir=$(dirname $(dirname "${BASH_SOURCE[0]}"))
+project_dir="$(dirname $(cd -P -- "$(dirname -- "$0")" && pwd -P))"
 
 echo Starting ${service_name} Docker image for ${TEAM} from ${project_dir} on Port:${SERVER_SERVICE_PORT}
 

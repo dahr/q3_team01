@@ -8,7 +8,7 @@ service_name="server-service"
 if [ -z ${TEAM} ]; then TEAM="team6";fi
 
 
-project_dir=$(dirname $(dirname "${BASH_SOURCE[0]}"))
+project_dir="$(dirname $(cd -P -- "$(dirname -- "$0")" && pwd -P))"
 
 echo "Stopping ${service_name} Docker image for ${TEAM} from ${project_dir}"
 
