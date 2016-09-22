@@ -11,7 +11,7 @@ var express = require('express'),
     Approval = require('../models/approval/Approval');
 
 // for documentation on the appproval service used to store the approvals for the servers:
-/// http://approval.vmwaredevops.appspot.com/swagger/index.html
+// http://approval.vmwaredevops.appspot.com/swagger/index.html
 var approvalService = {
 
     urlBase: config.url.approval,
@@ -188,12 +188,7 @@ var approvalService = {
                     return reject(errorsFound);
                 }
 
-                var parsedResponse = jsonUtils.parseResponseBody(options, body);
-                if (parsedResponse.error) {
-                    return reject(parsedResponse.error);
-                }
-
-                resolve(parsedResponse.data);
+                resolve({id: approvalId});
             });
         });
     },

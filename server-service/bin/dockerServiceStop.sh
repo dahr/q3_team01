@@ -15,10 +15,16 @@ echo "Stopping ${service_name} Docker image for ${TEAM} from ${project_dir}"
 container_id=`docker ps -aqf name="${TEAM}-${service_name}"`
 
 
-echo "Stopping Docker ID:${container_id}"
-docker stop ${container_id}
 
-echo "Removing Docker ID:${container_id}"
-docker rm ${container_id}
+container_id=`docker ps -aqf name="${TEAM}-${service_name}"`
 
-docker ps
+if [ "${container_id}" != "" ]; then
+    echo "Stopping Docker ID:${container_id}"
+    docker stop ${container_id}
+
+    echo "Removing Docker ID:${container_id}"
+    docker rm ${container_id}
+
+    docker ps
+fi
+
