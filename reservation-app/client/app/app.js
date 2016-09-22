@@ -1,10 +1,9 @@
 'use strict';
 
-angular.module('node-express-angular', [
+angular.module('reservation-app', [
     'app.templates',
     'ui.router',
-    'ngTable',
-    'nea.home'
+    'app.views.home'
 
 ])
 
@@ -43,7 +42,7 @@ angular.module('node-express-angular', [
 
 
     .run(['$rootScope', function ($rootScope) {
-        $rootScope.appName = 'node-express-angular';
+        $rootScope.appName = 'reservation-app';
     }])
 
 

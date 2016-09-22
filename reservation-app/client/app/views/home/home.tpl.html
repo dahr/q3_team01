@@ -1,22 +1,37 @@
 <div>
 
     <div>
-        Some data from the controller
-
-        <table ng-table="vm.tableParams" class="table" show-filter="true">
+        <table class="table" style="border: 1px solid black; border-collapse: collapse; width: 100%">
+            <thead>
+            <tr>
+                <th>Server</th>
+                <th>Description</th>
+                <th>Assigned</th>
+            </tr>
+            </thead>
+            <tbody>
             <tr ng-repeat="server in vm.data">
-                <td title="'Code'" filter="{ code: 'text'}" sortable="'code'">
-                    {{server.code}}</td>
-                <td title="'Location'" filter="{ location: 'text'}" sortable="'location'">
-                    {{server.location}}</td>
-                <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">
-                    {{server.name}}</td>
-                </tr>
+                <td>
+                    {{server.name}}
+                </td>
+                <td>
+                    {{server.description}}
+                </td>
+                <td>
+                    {{server.approval.description.user}}
+                </td>
+            </tr>
+
+            </tbody>
         </table>
 
-        <p>{{vm.data}}</p>
     </div>
+    <div>
+<br/>
+        <hr/>
+        <h2>This is the raw data for dev </h2>
+        <p>{{vm.data}}</p>
 
-
+    </div>
 
 </div>

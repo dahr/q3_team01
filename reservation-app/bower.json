@@ -1,11 +1,11 @@
 {
-  "name": "node-express-angular",
-  "description": "Boilerplate for simple node express app",
+  "name": "reservation-app",
+  "description": "Application for managing lab server reservations",
   "main": "app.js",
   "authors": [
     "Uwe Hale"
   ],
-  "license": "ISC",
+  "license": "Apache-2.0",
   "homepage": "",
   "ignore": [
     "**/.*",

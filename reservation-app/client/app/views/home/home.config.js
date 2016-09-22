@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nea.home.config',[])
+angular.module('app.views.home.config',[])
 
     .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         function ($stateProvider, $urlRouterProvider, $locationProvider) {

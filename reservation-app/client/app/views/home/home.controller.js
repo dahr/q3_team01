@@ -1,36 +1,24 @@
 'use strict';
 
-angular.module('nea.home.controller', [
-    'nea.services.sampledata',
-    'ngTable'
-
-
+angular.module('app.views.home.controller', [
+    'app.services.reservationservice'
 ])
 
-    .controller('CtrlHome', ['$scope', 'SampleDataService', 'NgTableParams',
-        function ($scope, SampleDataService, NgTableParams) {
+    .controller('CtrlHome', ['$scope', 'ReservationService',
+        function ($scope, ReservationService) {
 
             console.log('CtrlHome');
 
             var vm = this;
 
-
-            vm.tableParams = new NgTableParams({}, { dataset: vm.data});
-
-
-
-
-
             ///////////////////////////////////////
             var loadData = function(){
 
-                SampleDataService.getSampleData()
+                ReservationService.getReservations()
                     .then(function (data) {
                         vm.data = data;
                     });
-
             };
-
 
             ///////////////////////////////////////
             function initHome(){

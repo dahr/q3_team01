@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('nea.home', [
-    'nea.home.config',
-    'nea.home.controller'
+angular.module('app.views.home', [
+    'app.views.home.config',
+    'app.views.home.controller'
 
 ])
 
