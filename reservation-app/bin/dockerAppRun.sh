@@ -3,14 +3,22 @@
 service_name="reservation-app"
 default_port="8090"
 
+# Services the app is linked to
+reservation_service="reservation-service"
+reservation_service_port="8093"
+
 #look for defined vars for the team name and port
 #else set to defaults
 if [ -z ${TEAM} ]; then TEAM="team6";fi
-if [ -z ${SERVER_SERVICE_PORT} ]; then SERVER_SERVICE_PORT=${default_port};fi
+if [ -z ${RESERVATION_APP_PORT} ]; then RESERVATION_APP_PORT=${default_port};fi
 
 
 project_dir="$(dirname $(cd -P -- "$(dirname -- "$0")" && pwd -P))"
 
-echo Starting ${service_name} Docker image for ${TEAM} from ${project_dir} on Port:${SERVER_SERVICE_PORT}
+echo Starting ${service_name} Docker image for ${TEAM} from ${project_dir} on Port:${RESERVATION_APP_PORT}
 
-docker run --link team6-reservation-service:reservation-service  -p${SERVER_SERVICE_PORT}:8090 --name "${TEAM}-${service_name}" -d ${TEAM}/${service_name}
+docker run --link team6-reservation-service:reservation-service  \
+--link team6-${reservation_service}:${reservation_service} -e RESERVATION_SERVICE="http://${reservation_service}:${reservation_service_port}" \
+-p${RESERVATION_APP_PORT}:${default_port} \
+--name "${TEAM}-${service_name}" \
+-d ${TEAM}/${service_name}

@@ -8,6 +8,7 @@ var express = require('express'),
 
 var reservation = {
 
+
     urlServers: config.url.serverService,
     urlApprovals: config.url.approvalService,
     urlTeam: config.url.approval + config.teamParam,
@@ -38,12 +39,17 @@ var reservation = {
 
     calculateApprovedServers: function(serverList, approvalList){
         return new Promise(function (resolve, reject) {
-            var approvedservers = {
-                servers: serverList,
-                approvals: approvalList
-            };
-            resolve(approvedservers);
 
+            serverList.forEach(function(server){
+               console.log('Processing Server:' + JSON.stringify(server));
+                approvalList.forEach(function (approval) {
+                    if(server.name === approval.description.name){
+                        server.approval = approval;
+                    }
+                })
+            });
+
+            resolve(serverList);
         })
     },
 

@@ -1,7 +1,7 @@
 {
-  "name": "approval-service",
+  "name": "reservation-service",
   "version": "1.0.0",
-  "description": "Microservice app for getting and creating server approvals",
+  "description": "Microservice app for getting and creating server reservations",
   "main": "app.js",
   "scripts": {
     "clean": "rm -Rf node_modules/*",
