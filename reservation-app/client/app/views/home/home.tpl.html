@@ -1,12 +1,20 @@
 <div>
 
     <div>
+        <h2 style="text-align: center">{{vm.data[0].month.text}}</h2>
+    </div>
+
+
+
+
+    <div>
         <table class="table" style="border: 1px solid black; border-collapse: collapse; width: 100%">
             <thead>
             <tr>
                 <th>Server</th>
                 <th>Description</th>
-                <th>Assigned</th>
+                <th ng-repeat="day in vm.data[0].month.days">{{day.idx}}</th>
+
             </tr>
             </thead>
             <tbody>
@@ -17,9 +25,12 @@
                 <td>
                     {{server.description}}
                 </td>
-                <td>
-                    {{server.approval.description.user}}
-                </td>
+
+                <th ng-repeat="day in server.month.days" ng-click="vm.onClickDay(server, day)">
+                <div ng-style="day.approval && {'background-color':'pink'} ">
+                    {{day.approval}}
+                </div>
+                </th>
             </tr>
 
             </tbody>

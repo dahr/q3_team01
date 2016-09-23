@@ -17,6 +17,7 @@
   "dependencies": {
     "angular": "^1.5.8",
     "angular-ui-router": "^0.3.1",
-    "ng-table": "^1.0.0"
+    "moment": "^2.15.1",
+    "angular-moment": "^0.10.3"
   }
 }

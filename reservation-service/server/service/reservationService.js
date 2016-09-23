@@ -42,9 +42,10 @@ var reservation = {
 
             serverList.forEach(function(server){
                console.log('Processing Server:' + JSON.stringify(server));
+                server.approvalList = [];
                 approvalList.forEach(function (approval) {
                     if(server.name === approval.description.name){
-                        server.approval = approval;
+                        server.approvalList.push(approval);
                     }
                 })
             });
