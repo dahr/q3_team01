@@ -4,15 +4,15 @@
   "description": "UI Application for the lab server reservation system",
   "main": "app.js",
   "scripts": {
-    "start": "node_modules/.bin/gulp build && node server/server.js",
+    "start": "cd client && ../node_modules/.bin/gulp build  && cd .. && node server/server.js",
     "clean": "rm -Rf node_modules/*",
-    "client": "node_modules/.bin/gulp",
+    "client": "cd client && ../node_modules/.bin/gulp && cd ..  ",
     "server": "node server/server.js",
     "debug": "node  --debug-brk=5858 server/server.js",
     "monitor": "nodemon server/server.js",
-    "watch": "node_modules/.bin/gulp watch",
+    "watch": "cd client && ../node_modules/.bin/gulp watch && cd .. ",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "node_modules/.bin/bower install"
+    "postinstall": "cd client && ../node_modules/.bin/bower install && cd .. "
   },
   "author": "Uwe Hale",
   "license": "Apache-2.0",

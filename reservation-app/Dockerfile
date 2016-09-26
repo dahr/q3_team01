@@ -10,7 +10,7 @@ RUN npm run clean
 
 RUN npm install
 
-RUN bower --allow-root install
+RUN cd client && bower --allow-root install
 
 RUN npm run client
 

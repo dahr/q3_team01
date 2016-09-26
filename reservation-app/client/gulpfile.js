@@ -19,23 +19,30 @@ var wrap = require('gulp-wrap');
 
 ///////////////////////////////////////////////////////////
 // Dir Setup
-var clientDir = './client/';
-var appDir = clientDir + 'app/';
+var clientDir = './';
+var bowerDir = clientDir + 'bower_components/';
 
-var publicDir = './public/';
+var appDir = clientDir + 'app/';
+var viewsDir = appDir + 'views/';
+
+var publicDir = clientDir + 'public/';
 var publicCssDir = publicDir + 'css/';
 var publicJsDir = publicDir + 'js/';
+var publicFontDir = publicDir + 'fonts/';
+
 
 ///////////////////////////////////////////////////////////
 // File Setup
-var indexFile = clientDir + 'index.html';
-var htmlFiles = appDir + '**/*.html';
+var indexFile = viewsDir + 'index.html';
+var htmlFiles = viewsDir + '**/*.html';
 var appJsFiles = appDir + '**/*.js';
+var fontFiles = bowerDir + 'font-awesome/fonts/**/*.{otf,ttf,woff,woff2,eof,eot,svg}';
 
 ///////////////////////////////////////////////////////////
 // Filter Setup
 var jsFilter = filter('**/*.js');
 var cssFilter = filter('**/*.css');
+var fontFilter = filter('**/*.{eot,svg,ttf,woff,woff2}');
 
 ///////////////////////////////////////////////////////////
 // concatenate and compress bower_components to vendor.{js|css}
@@ -77,6 +84,22 @@ gulp.task('views', function () {
 });
 
 ///////////////////////////////////////////////////////////
+gulp.task('fonts', function () {
+
+    var bowerFiles = bowerMainFiles();
+
+    console.log("Publid Fonts:" + publicFontDir);
+
+    // build vendor font files and put in css dir
+    gulp.src(bowerFiles)
+        .pipe(fontFilter)
+        .pipe(gulp.dest(publicCssDir));
+
+    return gulp.src(fontFiles)
+        .pipe(gulp.dest(publicFontDir));
+});
+
+///////////////////////////////////////////////////////////
 // concatenate and compress app js & styl file to app.{js|css}
 gulp.task('app', function () {
     var jsFile = 'app.js', paths = [appJsFiles];
@@ -97,11 +120,11 @@ gulp.task('watch', ['build'], function () {
 
 ///////////////////////////////////////////////////////////
 // Build task - sequential
-gulp.task('build', ['vendor', 'views', 'app'], function () {
+gulp.task('build', ['vendor', 'views', 'app', 'fonts'], function () {
 });
 
 ///////////////////////////////////////////////////////////
 // Build task
 gulp.task('default', function () {
-    gulp.start('vendor', 'views', 'app');
+    gulp.start('vendor', 'views', 'app', 'fonts');
 });
