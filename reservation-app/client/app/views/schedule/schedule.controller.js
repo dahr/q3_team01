@@ -1,35 +1,49 @@
 'use strict';
 
-angular.module('app.views.home.controller', [
+angular.module('app.views.schedule.controller', [
     'angularMoment',
+    'ui.grid',
     'app.services.reservationservice'
 ])
 
-    .controller('CtrlHome', ['$scope', 'ReservationService', 'moment',
-        function ($scope, ReservationService, moment) {
+    .controller('CtrlSchedule', ['$scope', '$timeout', 'ReservationService', 'moment',
+        function ($scope, $timeout, ReservationService, moment) {
 
-            console.log('CtrlHome');
+            console.log('CtrlSchedule');
 
             var vm = this;
+            vm.data = [];
 
+            $scope.checkLogin();
 
-            vm.onClickDay = function(server, day){
-                alert('Server:' + server.name + '\nDescription:' + server.description + "\nDate:" + day.date);
+            ///////////////////////////////////////
+            vm.onClickDay = function (server, day) {
+
+                var serverInfo = server.name + ', ' + server.description + ', ';
+                if(day.approval){
+                    alert(serverInfo + ' Is already booked by\n' +
+                        day.approval.user + ' (' + day.approval.email + ')' +
+                    ' on ' + day.date);
+
+                }else{
+                    alert(serverInfo + ' is available on ' + day.date);
+
+                }
             };
 
 
             ///////////////////////////////////////
-            var loadData = function(){
+            var loadData = function () {
 
                 ReservationService.getReservations()
                     .then(function (data) {
 
-                        data.forEach(function(server){
+                        data.forEach(function (server) {
                             server.month = getDaysArrayByMonth();
-                            server.month.days.forEach(function(day){
+                            server.month.days.forEach(function (day) {
 
-                                server.approvalList.forEach(function(approval){
-                                    if(day.raw.format('YYYYMMDD') === approval.description.date){
+                                server.approvalList.forEach(function (approval) {
+                                    if (day.raw.format('YYYYMMDD') === approval.description.date) {
                                         day.approval = approval.description;
                                     }
                                 });
@@ -56,7 +70,7 @@ angular.module('app.views.home.controller', [
 
                 var formatL = moment.localeData().longDateFormat('L');
 
-                for(var idx = 1; idx <= daysInMonth; idx++){
+                for (var idx = 1; idx <= daysInMonth; idx++) {
                     var day = moment().date(idx);
                     month.days.push({
                         idx: idx,
@@ -69,11 +83,11 @@ angular.module('app.views.home.controller', [
             }
 
             ///////////////////////////////////////
-            function initHome(){
-              loadData();
+            function initSchedule() {
+                loadData();
             }
 
-            initHome();
+            $timeout(initSchedule);
 
         }])
 

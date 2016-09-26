@@ -1,0 +1,59 @@
+<div>
+
+    <div>
+        <h2 style="text-align: center">{{vm.data[0].month.text}}</h2>
+    </div>
+
+    <div ng-show="vm.data">
+        <md-content>
+
+
+            <md-list>
+
+                <md-list-item class="md-2-line" ng-repeat="server in vm.data" >
+                    <div class="md-list-item-text" ng-style="{'background-color':'lightgray', 'border':'solid black 1px'}">
+
+                        <div layout="row">
+                            <div flex="initial">
+                                <h3>{{server.name}} &nbsp; - &nbsp;</h3>
+                                </div>
+                            <div flex="grow">
+                                <p>{{server.description}}</p>
+                            </div>
+                        </div>
+
+                        <div layout="row" layout-wrap ng-style="{'border-top':'solid black 1px','background-color':'white'}">
+                            <div flex="none" ng-repeat="day in server.month.days"
+                                 ng-style="day.approval &&
+                                 {'background-color':'pink','width':'27px'} ||
+                                 {'width':'27px'} "
+                                 >
+                                <div ng-click="vm.onClickDay(server, day)">
+                                    {{day.idx}}
+                                </div>
+                                <md-tooltip ng-show="day.approval">
+                                    {{server.name }} is assigned
+                                    to {{ day.approval. user }}
+                                    on {{ day.date }}
+                                </md-tooltip>
+                            </div>
+                        </div>
+                        <div layout="row" layout-wrap>
+                        </div>
+
+
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </div>
+
+    <!--<div>-->
+    <!--<br/>-->
+    <!--<hr/>-->
+    <!--<h2>This is the raw data for dev </h2>-->
+    <!--<p>{{vm.data}}</p>-->
+
+    <!--</div>-->
+
+</div>

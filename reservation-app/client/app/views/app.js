@@ -5,7 +5,7 @@ angular.module('reservation-app', [
     'ui.router',
     'ngMaterial',
     'ngMdIcons',
-    'app.views.home',
+    'app.views.schedule',
     'app.views.login'
 ])
 

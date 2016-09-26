@@ -27,6 +27,7 @@
     "angular-material-icons": "^0.7.1",
     "font-awesome": "^4.6.3",
     "angular-breadcrumb": "^0.4.1",
-    "bootstrap-sass": "bootstrap-sass-official#^3.3.7"
+    "bootstrap-sass": "bootstrap-sass-official#^3.3.7",
+    "angular-ui-grid": "^3.2.9"
   }
 }

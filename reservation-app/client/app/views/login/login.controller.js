@@ -5,13 +5,17 @@ angular.module('app.views.login.controller', [])
         function ($scope, $rootScope) {
 
             var vm = this;
+            vm.user = {name: '', email:''};
 
-            vm.loginUser = function () {
-                $scope.goToState('home');
-                $rootScope.user = {name: 'user1', email: 'user1@gmail.com'};
-                $scope.hideSidenav('left');
-                $scope.hideSidenav('right');
 
-            }
+            vm.loginUser = function (isValid) {
+                if(isValid){
+                    $scope.goToState('schedule_list');
+                    $rootScope.user = vm.user;
+                    $scope.hideSidenav('left');
+                    $scope.hideSidenav('right');
+                }
+            };
+
 
         }]); // controller_end
