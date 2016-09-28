@@ -9,9 +9,9 @@ var servers = {
 
     urlBase: config.url.serverService,
 
-    postServer: function (server) {
+    postServer: function (newServer) {
 
-        console.log(JSON.stringify(server));
+        console.log(JSON.stringify(newServer));
 
         var options = {
             url: this.urlBase,
@@ -19,7 +19,7 @@ var servers = {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(server)
+            body: JSON.stringify(newServer)
         };
 
         return new Promise(function (resolve, reject) {
@@ -36,8 +36,15 @@ var servers = {
                     return reject(parsedResponse.error);
                 }
 
+                var returnServer={};
+                // only return the new matching server from the response
+                parsedResponse.data.forEach(function(server){
+                    if(newServer.name === server.name){
+                        returnServer = server;
+                    }
+                });
 
-                resolve(parsedResponse.data);
+                resolve(returnServer);
             });
 
         });

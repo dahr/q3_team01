@@ -15,7 +15,7 @@ angular.module('app.views.servers.controller', [
             vm.server = {name: '', description:''};
             vm.errors = [];
 
-            //$scope.checkLogin();
+            $scope.checkLogin();
 
 
             ///////////////////////////////////////

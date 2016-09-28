@@ -5,23 +5,33 @@ var Promise = require('promise'),
     config = require('../Config');
 
 
-var reservation = {
+var reservation;
+reservation = {
 
     urlBase: config.url.reservationService,
 
+
     /**
-     * Get all the reservations in an array
+     * Gets an array of reservations.
+     * Can be filtered by the reservation id
+     * @param id
      * @returns {*}
      */
-    getReservations: function () {
+    getReservations: function (id) {
+
 
         var options = {
-            url: this.urlBase
+            url: this.urlBase,
+            method: 'GET'
         };
+
+        if (id) {
+            options.url = this.urlBase + '/' + id;
+        }
 
         return new Promise(function (resolve, reject) {
 
-            request(options, function (error, response, body) {
+            request.get(options, function (error, response, body) {
 
                 var errorsFound = errorHandler.hasErrors(options, error, response);
                 if (errorsFound) {
@@ -34,11 +44,53 @@ var reservation = {
                 }
 
                 resolve(parsedResponse.data);
-            })
+            });
+
+        });
+    },
+
+
+
+    /**
+     * Create a new reservation by calling the reservation service
+     * TODO: this only processes one day right now, the start_date
+     */
+    postReservation: function (newReservation) {
+
+        console.log(JSON.stringify(newReservation));
+
+        var options = {
+            url: this.urlBase,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newReservation)
+        };
+
+        return new Promise(function (resolve, reject) {
+
+            request.post(options, function (error, response, body) {
+
+                var errorsFound = errorHandler.hasErrors(options, error, response);
+                if (errorsFound) {
+                    return reject(errorsFound);
+                }
+
+                var parsedResponse = jsonUtils.parseResponseBody(options, body);
+                if (parsedResponse.error) {
+                    return reject(parsedResponse.error);
+                }
+
+
+                resolve(parsedResponse.data);
+            });
 
         });
 
-    }
+    },
+
+
 };
 
 

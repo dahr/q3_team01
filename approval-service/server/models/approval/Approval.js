@@ -7,7 +7,7 @@ var approval = function () {
     this.teamID = parseInt(config.teamNumber);
     this.blob = 0;
     this.description = '';
-    this.approved = true;
+    this.approved = false;
 
 
 };

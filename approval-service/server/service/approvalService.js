@@ -198,11 +198,11 @@ var approvalService = {
     checkForDuplicates: function (currentApprovals, serverInfo) {
 
         var newApproval = new Approval();
-        newApproval.description = JSON.stringify(serverInfo);
+        newApproval.description = serverInfo;
         newApproval.blob = parseInt(serverInfo.date);
 
         currentApprovals.forEach(function (approval) {
-            if (approval.blob === newApproval.blob && approval.name === newApproval.description.name) {
+            if (approval.blob === newApproval.blob && approval.description.name === newApproval.description.name) {
                 var error = 'Server tst is already being used:' + JSON.stringify(approval);
                 throw new ApprovalRequestDuplicateException(approval);
             }

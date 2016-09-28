@@ -10,26 +10,31 @@
 
             <md-list>
 
-                <md-list-item class="md-2-line" ng-repeat="server in vm.data" >
+                <md-list-item class="md-2-line" ng-repeat="server in vm.data">
                     <!--TODO: Move to CSS-->
-                    <div class="md-list-item-text" ng-style="{'background-color':'lightgray', 'border':'solid black 1px'}">
+                    <div class="md-list-item-text"
+                         ng-style="{'background-color':'lightgray', 'border':'solid black 1px'}">
 
                         <div layout="row">
                             <div flex="initial">
                                 <h3>{{server.name}} &nbsp; - &nbsp;</h3>
-                                </div>
+                            </div>
                             <div flex="grow">
                                 <p>{{server.description}}</p>
                             </div>
                         </div>
 
                         <!--TODO: Move to CSS-->
-                        <div layout="row" layout-wrap ng-style="{'border-top':'solid black 1px','background-color':'white'}">
+                        <div layout="row" layout-wrap
+                             ng-style="{'border-top':'solid black 1px','background-color':'white'}">
                             <div flex="none" ng-repeat="day in server.month.days"
-                                 ng-style="day.approval &&
+
+                                 ng-style="day.approval.approved === 'APPROVED' &&
                                  {'background-color':'pink','width':'27px'} ||
-                                 {'width':'27px'} "
-                                 >
+                                 (day.approval.approved === 'PENDING' &&
+                                 {'background-color':'yellow','width':'27px'} ||
+                                 {'width':'27px'}) "
+                            >
                                 <div ng-click="vm.onClickDay(server, day)">
                                     {{day.idx}}
                                 </div>

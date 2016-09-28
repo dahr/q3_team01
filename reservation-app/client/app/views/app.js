@@ -102,6 +102,22 @@ angular.module('reservation-app', [
             };
 
             /////////////////////////////////////////////////////////////////////////
+            $scope.getUserName = function () {
+                if ($rootScope.user) {
+                    return $rootScope.user.name;
+                }
+            };
+
+
+            /////////////////////////////////////////////////////////////////////////
+            $scope.getUserEmail = function () {
+                if ($rootScope.user) {
+                    return $rootScope.user.email;
+                }
+            };
+
+
+            /////////////////////////////////////////////////////////////////////////
             $scope.logoutUser = function () {
                 $rootScope.user = null;
                 $state.go('login');

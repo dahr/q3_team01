@@ -1,6 +1,7 @@
 var express = require('express'),
     Promise = require('promise'),
     request = require('request'),
+    moment = require('moment'),
     jsonUtils = require('./util/JsonUtils'),
     errorHandler = require('./util/errorHandler'),
     config = require('../Config');
@@ -15,37 +16,45 @@ var reservation = {
 
     /**
      * Get all the reservations in an array
+     * Filer by id if passed
      * @returns {*}
      */
-    getReservations: function () {
+    getReservations: function (id) {
         _self = this;
 
         return new Promise(function (resolve, reject) {
             _self.getServers()
-                .then(function(serverList){
+                .then(function (serverList) {
                     _self.getApprovals()
-                        .then(function(approvalList){
-                            _self.calculateApprovedServers(serverList, approvalList)
-                                .then(function(approvedServers){
+                        .then(function (approvalList) {
+                            _self.calculateApprovedServers(serverList, approvalList, id)
+                                .then(function (approvedServers) {
                                     resolve(approvedServers);
 
                                 });
                         })
                 });
 
-            });
+        });
 
     },
 
-    calculateApprovedServers: function(serverList, approvalList){
+    calculateApprovedServers: function (serverList, approvalList, approvalId) {
         return new Promise(function (resolve, reject) {
 
-            serverList.forEach(function(server){
-               console.log('Processing Server:' + JSON.stringify(server));
+            serverList.forEach(function (server) {
+                console.log('Processing Server:' + JSON.stringify(server));
+
                 server.approvalList = [];
                 approvalList.forEach(function (approval) {
-                    if(server.name === approval.description.name){
+
+                    if (server.name === approval.description.name) {
                         server.approvalList.push(approval);
+
+                        if (approvalId && approval.id === parseInt(approvalId)) {
+                            // Find and return the only server/approval by id
+                            return resolve([server]);
+                        }
                     }
                 })
             });
@@ -54,7 +63,7 @@ var reservation = {
         })
     },
 
-    getApprovals: function(){
+    getApprovals: function () {
         var options = {
             url: this.urlApprovals,
             method: 'GET'
@@ -105,14 +114,52 @@ var reservation = {
     },
 
 
+
+    convertReservationToApproval: function (newReservation) {
+        var resDate = moment(newReservation.start_date);
+        return {
+            "name": newReservation.server_name,
+            "date": resDate.format('YYYYMMDD'),
+            "user": newReservation.name,
+            "email": newReservation.name + '@' + 'test.net'
+        };
+    },
+
     /**
-     * Send a reservation to the approval queue
+     * Convert a reservation and send to the approval service
      */
     createReservation: function (reservation) {
 
+        var approval = this.convertReservationToApproval(reservation);
+
+        var options = {
+            url: this.urlApprovals,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(approval)
+        };
+
         return new Promise(function (resolve, reject) {
-            resolve("Reservation Sent to Queue");
-        })
+
+            request.post(options, function (error, response, body) {
+
+                var errorsFound = errorHandler.hasErrors(options, error, response);
+                if (errorsFound) {
+                    return reject(errorsFound);
+                }
+
+                var parsedResponse = jsonUtils.parseResponseBody(options, body);
+                if (parsedResponse.error) {
+                    return reject(parsedResponse.error);
+                }
+
+                //parsedResponse.data.description = jsonUtils.parseEncodedString(parsedResponse.data.description);
+
+                resolve(parsedResponse.data);
+            });
+        });
     }
 
 };

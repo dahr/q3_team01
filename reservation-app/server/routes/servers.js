@@ -13,7 +13,8 @@ router.get('/', function (req, res) {
             function (error) {
                 return res.status(500).send(error);
             }
-        );});
+        );
+});
 
 router.post('/', function (req, res) {
 
@@ -24,7 +25,7 @@ router.post('/', function (req, res) {
                 res.send(data);
             },
             function (error) {
-                return res.status(500).send(error.res.body);
+                return res.status(error.res.statusCode).send(error.res.body);
             }
         );
 });

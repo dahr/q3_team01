@@ -22,6 +22,23 @@ router.get('/', function (req, res) {
 });
 
 /**
+ * get a reservation by ID, in an array
+ */
+router.get('/:id', function (req, res) {
+
+    reservationService.getReservations(req.param('id'))
+        .then(
+            function (data) {
+                console.log('Reservation' + JSON.stringify(data));
+                res.send(data);
+            },
+            function (error) {
+                return res.status(500).send(error);
+            }
+        );
+});
+
+/**
  * create a reservation
  */
 router.post('/', function (req, res) {
@@ -36,7 +53,7 @@ router.post('/', function (req, res) {
                     res.send(data);
                 },
                 function (error) {
-                    return res.status(500).send(error);
+                    return res.status(error.res.statusCode).send(error);
                 }
             );
 
