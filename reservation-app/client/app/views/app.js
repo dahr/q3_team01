@@ -6,6 +6,7 @@ angular.module('reservation-app', [
     'ngMaterial',
     'ngMdIcons',
     'app.views.schedule',
+    'app.views.servers',
     'app.views.login'
 ])
 
@@ -87,7 +88,7 @@ angular.module('reservation-app', [
             /////////////////////////////////////////////////////////////////////////
             $scope.goToState = function (state) {
                 $state.go(state);
-                $scope.toggleSidenav('left');
+                //$scope.toggleSidenav('left');
 
             };
 

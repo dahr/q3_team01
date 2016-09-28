@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('app.services.reservationservice', [])
-    .service('ReservationService', function($http){
+angular.module('app.services.reservations', [])
+    .service('ReservationsService', function($http){
 
     this.getReservations = function() {
 

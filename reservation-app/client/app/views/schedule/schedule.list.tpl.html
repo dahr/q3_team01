@@ -11,6 +11,7 @@
             <md-list>
 
                 <md-list-item class="md-2-line" ng-repeat="server in vm.data" >
+                    <!--TODO: Move to CSS-->
                     <div class="md-list-item-text" ng-style="{'background-color':'lightgray', 'border':'solid black 1px'}">
 
                         <div layout="row">
@@ -22,6 +23,7 @@
                             </div>
                         </div>
 
+                        <!--TODO: Move to CSS-->
                         <div layout="row" layout-wrap ng-style="{'border-top':'solid black 1px','background-color':'white'}">
                             <div flex="none" ng-repeat="day in server.month.days"
                                  ng-style="day.approval &&

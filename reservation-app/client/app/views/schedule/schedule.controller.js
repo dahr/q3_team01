@@ -3,11 +3,11 @@
 angular.module('app.views.schedule.controller', [
     'angularMoment',
     'ui.grid',
-    'app.services.reservationservice'
+    'app.services.reservations'
 ])
 
-    .controller('CtrlSchedule', ['$scope', '$timeout', 'ReservationService', 'moment',
-        function ($scope, $timeout, ReservationService, moment) {
+    .controller('CtrlSchedule', ['$scope', '$timeout', 'ReservationsService', 'moment',
+        function ($scope, $timeout, ReservationsService, moment) {
 
             console.log('CtrlSchedule');
 
@@ -35,7 +35,7 @@ angular.module('app.views.schedule.controller', [
             ///////////////////////////////////////
             var loadData = function () {
 
-                ReservationService.getReservations()
+                ReservationsService.getReservations()
                     .then(function (data) {
 
                         data.forEach(function (server) {

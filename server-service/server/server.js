@@ -1,5 +1,4 @@
 var express = require('express');
-
 var bodyParser = require('body-parser');
 
 var app = express();
@@ -16,6 +15,6 @@ var server = app.listen(8091, function () {
     var port = server.address().port;
 
     console.log("Running from: %s", __dirname);
-    console.log("Reservation Service listening at http://%s:%s", host, port)
+    console.log("Server Service listening at http://%s:%s", host, port)
 
 });

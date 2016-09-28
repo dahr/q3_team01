@@ -6,7 +6,7 @@ var serverRequestValidator = {
 
         var errorList = [];
         if (!server.name) {
-            errorList.push('Missing ServerName');
+            errorList.push('Missing name');
         }
 
         if (errorList.length) {

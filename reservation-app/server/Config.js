@@ -5,6 +5,10 @@ var Config = {
     url: {
         reservationService: (function () {
             return process.env.RESERVATION_SERVICE ? process.env.RESERVATION_SERVICE + '/api/reservations' : 'http://localhost:8093/api/reservations';
+        })(),
+
+        serverService: (function () {
+            return process.env.SERVER_SERVICE ? process.env.SERVER_SERVICE + '/api/servers' : 'http://localhost:8091/api/servers';
         })()
 
     }
