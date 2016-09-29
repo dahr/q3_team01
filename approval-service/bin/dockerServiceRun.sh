@@ -13,4 +13,4 @@ project_dir="$(dirname $(cd -P -- "$(dirname -- "$0")" && pwd -P))"
 
 echo Starting ${service_name} Docker image for ${TEAM} from ${project_dir} on Port:${APPROVAL_SERVICE_PORT}
 
-docker run -p${APPROVAL_SERVICE_PORT}:8092 --name "${TEAM}-${service_name}" -d ${TEAM}/${service_name}
+docker run -p ${APPROVAL_SERVICE_PORT}:8092 --name "${TEAM}-${service_name}" -d ${TEAM}/${service_name}

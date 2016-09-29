@@ -30,15 +30,16 @@ You can now build and run all the services and the app in docker containers usin
 See contents of bash scripts for examples to manually run docker commands
 
 ```
-./bin/dockerBuildAndRun.sh
+./bin/dockerBuild.sh
+```
+
+```
+./bin/dockerRun.sh
 ```
 
 ```
 ./bin/dockerStop.sh
 ```
-
-
-
 
 ## Services
 
@@ -102,5 +103,5 @@ POST: /api/reservations
 #### Reservation-App
 This is the UI application for the lab server reservation system.
 It interfaces with the reservation system to manage the servers and reservations.
-It is setup to run on port 8081 for development and **8099** in the default docker container
-http://localhost:8090/app/nea
+It is setup to run on port 8081 for development and **8090** in the default docker container
+http://localhost:8090/app

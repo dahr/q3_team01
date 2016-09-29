@@ -30,7 +30,7 @@ You can now build and run the app in a docker container using the Dockerfile.
 See contents of bash scripts for examples to manually run docker commands
 
 
-http://localhost:8090/app/nea
+http://localhost:8090/app
 
 ```
 ./bin/dockerAppBuild.sh

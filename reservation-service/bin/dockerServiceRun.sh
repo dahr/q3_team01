@@ -21,7 +21,7 @@ echo Starting ${service_name} Docker image for ${TEAM} from ${project_dir} on Po
 docker run  \
 --link team6-${server_service}:${server_service} -e SERVER_SERVICE="http://${server_service}:${server_service_port}" \
 --link team6-${approval_service}:${approval_service}  -e APPROVAL_SERVICE="http://${approval_service}:${approval_service_port}" \
--p${RESERVATION_SERVICE_PORT}:${default_port} \
+-p ${RESERVATION_SERVICE_PORT}:${default_port} \
 --name "${TEAM}-${service_name}" \
 -d ${TEAM}/${service_name}
 
