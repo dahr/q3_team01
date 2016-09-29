@@ -1,0 +1,2 @@
+require('./ReservationRequestConsumer');
+require('./TestRequestConsumer');

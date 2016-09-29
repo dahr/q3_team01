@@ -25,6 +25,7 @@
     "bower": "^1.7.9",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "kafka-node": "^0.5.8",
     "multer": "^1.2.0",
     "promise": "^7.1.1",
     "request": "^2.74.0",
@@ -44,4 +45,3 @@
     "main-bower-files": "^2.13.1"
   }
 }
-
