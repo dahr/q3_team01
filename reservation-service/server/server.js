@@ -2,6 +2,9 @@ var express = require('express');
 
 var bodyParser = require('body-parser');
 
+// setup the journal message consumers
+require('./consumers/index');
+
 var app = express();
 
 app.use(bodyParser.json()); // for parsing application/json
