@@ -1,9 +1,10 @@
 var Promise = require('promise'),
+    config = require('../Config'),
     kafka = require('kafka-node');
 
 
-var journalService = {
-
+var messagingService = {
+    urlMsgClient: config.url.messagingService,
 
     postMessage: function (topic, message) {
 
@@ -15,7 +16,7 @@ var journalService = {
 
         return new Promise(function (resolve, reject) {
 
-            var kafkaProducer = new kafka.HighLevelProducer(new kafka.Client());
+            var kafkaProducer = new kafka.HighLevelProducer(new kafka.Client(this.urlMsgClient));
 
             kafkaProducer.on('ready', function () {
                 kafkaProducer.send(payloads,
@@ -32,4 +33,4 @@ var journalService = {
 };
 
 
-module.exports = journalService;
+module.exports = messagingService;

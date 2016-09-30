@@ -1,4 +1,4 @@
-#!/bin/bash
+        #!/bin/bash
 
 service_name="server-service"
 default_port="8091"

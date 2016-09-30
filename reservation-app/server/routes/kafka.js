@@ -1,7 +1,6 @@
 var express = require('express'),
     router = express.Router(),
-    config = require('../Config'),
-    journalService = require('../service/journalService');
+    messagingService = require('../service/messagingService');
 
 
 // TODO: simple endpoint to test the sending of message to kafka
@@ -9,7 +8,7 @@ var express = require('express'),
 // call it with api/kafka/{message} and you should see the parm in the consumer
 router.get('/:message', function (req, res) {
 
-    journalService.postMessage('test', req.param('message'))
+    messagingService.postMessage('test', req.param('message'))
         .then(
             function (data) {
                 return res.send(data);

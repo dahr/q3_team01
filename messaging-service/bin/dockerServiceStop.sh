@@ -1,6 +1,6 @@
 #!/bin/bash
 
-service_name="approval-service"
+service_name="messaging-service"
 
 
 #look for defined vars for the team name and port

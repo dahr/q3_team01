@@ -5,6 +5,9 @@ var Config = {
 
     url: {
 
+        messagingService: (function () {
+            return process.env.MESSAGING_SERVICE ? process.env.MESSAGINGSERVICE : 'kafka:2181';
+        })(),
         reservationService: (function () {
             return process.env.RESERVATION_SERVICE ? process.env.RESERVATION_SERVICE + '/api/reservations' : 'http://localhost:8093/api/reservations';
         })(),

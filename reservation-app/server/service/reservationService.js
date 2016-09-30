@@ -3,7 +3,7 @@ var Promise = require('promise'),
     jsonUtils = require('./util/JsonUtils'),
     errorHandler = require('./util/errorHandler'),
     config = require('../Config'),
-    journalService = require('../service/journalService');
+    messagingService = require('../service/messagingService');
 
 
 
@@ -62,7 +62,7 @@ reservation = {
         console.log(JSON.stringify(newReservation));
 
         // TODO: this message call will replace the http request below
-        return journalService.postMessage(config.TOPIC_RESERVATION_REQUEST, JSON.stringify(newReservation));
+        return messagingService.postMessage(config.TOPIC_RESERVATION_REQUEST, JSON.stringify(newReservation));
 
         // var options = {
         //     url: this.urlBase,

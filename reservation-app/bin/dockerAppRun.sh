@@ -8,6 +8,8 @@ reservation_service="reservation-service"
 reservation_service_port="8093"
 server_service="server-service"
 server_service_port="8091"
+messaging_service="kafka"
+messaging_service_port="2181"
 
 #look for defined vars for the team name and port
 #else set to defaults
@@ -21,6 +23,7 @@ echo Starting ${service_name} Docker image for ${TEAM} from ${project_dir} on Po
 
 docker run --link team6-reservation-service:reservation-service  \
 --link team6-${reservation_service}:${reservation_service} -e RESERVATION_SERVICE="http://${reservation_service}:${reservation_service_port}" \
+--link team6-${server_service}:${server_service} -e SERVER_SERVICE="http://${server_service}:${server_service_port}" \
 -p ${RESERVATION_APP_PORT}:${default_port} \
 --name "${TEAM}-${service_name}" \
 -d ${TEAM}/${service_name}
