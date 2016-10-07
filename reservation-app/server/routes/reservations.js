@@ -1,6 +1,9 @@
 var express = require('express'),
     router = express.Router(),
-    reservationService = require('../service/reservationService');
+    moment = require('moment'),
+    config = require('../Config'),
+    reservationService = require('../service/reservationService'),
+    messagingService = require('../service/messagingService');
 
 
 
@@ -41,16 +44,33 @@ router.get('/:id', function (req, res) {
 
 router.post('/', function (req, res) {
 
-    reservationService.postReservation(req.body)
+    var newApproval = convertReservationToApproval(req.body);
+
+    console.log('Posting New Reservation Request:' + JSON.stringify(newApproval));
+
+    messagingService.postMessage(config.TOPIC_APPROVAL_REQUEST, newApproval)
         .then(
             function (data) {
-                console.log('New Reservation' + JSON.stringify(data));
+                console.log('Finished Posting New Reservation' + JSON.stringify(data));
                 res.send(data);
             },
             function (error) {
+                console.log('ERROR Posting New Reservation:' + JSON.stringify(newApproval) + JSON.stringify(error));
                 return res.status(500).send(error.res.body);
             }
         );
+
+
 });
+
+function convertReservationToApproval(newReservation) {
+    var resDate = moment(newReservation.start_date);
+    return {
+        "name": newReservation.server_name,
+        "date": resDate.format('YYYYMMDD'),
+        "user": newReservation.name,
+        "email": newReservation.name + '@' + 'test.net'
+    };
+}
 
 module.exports = router;

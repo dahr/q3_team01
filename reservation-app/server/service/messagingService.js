@@ -8,20 +8,25 @@ var messagingService = {
 
     postMessage: function (topic, message) {
 
-        console.log(topic + ' - ' + JSON.stringify(message));
+        var _self = this;
+        var messageString = JSON.stringify(message);
+        console.log(topic + ' - ' + messageString);
 
         var payloads = [
-            {topic: topic, messages: message}
+            {topic: topic, messages: messageString}
         ];
 
         return new Promise(function (resolve, reject) {
 
-            var kafkaProducer = new kafka.HighLevelProducer(new kafka.Client(this.urlMsgClient));
+            var kafkaProducer = new kafka.HighLevelProducer(new kafka.Client(_self.urlMsgClient));
 
             kafkaProducer.on('ready', function () {
                 kafkaProducer.send(payloads,
                     function (err, data) {
-                        console.log('Responsedata:' + data);
+                        if(err){
+                            return reject(err);
+                        }
+                        console.log('MsgResponse:' + JSON.stringify(data));
                         resolve(data);
                     });
             });

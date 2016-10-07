@@ -1,2 +1,0 @@
-require('./ReservationRequestConsumer');
-require('./TestRequestConsumer');

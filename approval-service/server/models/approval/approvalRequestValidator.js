@@ -9,11 +9,11 @@ var approvalRequestValidator = {
 
         var errorList = [];
         if (!approvalRequest.name) {
-            errorList.push('Missing ServerName');
+            errorList.push('Missing Server name');
         }
 
         if (!approvalRequest.date) {
-            errorList.push('Missing Date');
+            errorList.push('Missing date');
         }
 
         // if we have a date, check the format
@@ -25,11 +25,11 @@ var approvalRequestValidator = {
         }
 
         if (!approvalRequest.user) {
-            errorList.push('Missing User');
+            errorList.push('Missing user');
         }
 
         if (!approvalRequest.email) {
-            errorList.push('Missing E-Mail');
+            errorList.push('Missing email');
         }
 
         if (errorList.length) {

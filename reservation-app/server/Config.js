@@ -1,7 +1,8 @@
 var Config = {
     teamNumber: '6',
     teamParam: '?teamID=6',
-    TOPIC_RESERVATION_REQUEST: 'APPROVAL_REQUEST',
+    TOPIC_APPROVAL_REQUEST: 'APPROVAL_REQUEST',
+    TOPIC_SERVERCREATE_REQUEST: 'SERVERCREATE_REQUEST',
 
     url: {
 
