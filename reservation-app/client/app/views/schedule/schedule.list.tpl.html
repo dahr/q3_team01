@@ -1,7 +1,19 @@
 <div>
 
-    <div>
-        <h2 style="text-align: center">{{vm.data[0].month.text}}</h2>
+    <div layout="row" layout-align="space-between center">
+        <div></div>
+        <div>
+            <h2>
+
+            <ng-md-icon icon="chevron_left" aria-label="Previous" ng-click="vm.onClickMonthPrevious()"></ng-md-icon>
+            {{vm.data[0].month.text}}
+            <ng-md-icon icon="chevron_right" aria-label="Next" ng-click="vm.onClickMonthNext()"></ng-md-icon>
+            </h2>
+        </div>
+        <div>
+        <ng-md-icon icon="update" aria-label="Refresh" ng-click="vm.onClickRefresh()"></ng-md-icon>
+        </div>
+
     </div>
 
     <div ng-show="vm.data">
@@ -35,7 +47,7 @@
                                  {'background-color':'yellow','width':'27px'} ||
                                  {'width':'27px'}) "
                             >
-                                <div ng-click="vm.onClickDay(server, day)">
+                                <div ng-click="vm.onClickDay(server, day)" ng-style="{'text-align': 'center'}">
                                     {{day.idx}}
                                 </div>
                                 <md-tooltip ng-show="day.approval">

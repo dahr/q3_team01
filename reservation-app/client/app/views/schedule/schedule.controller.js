@@ -58,6 +58,19 @@ angular.module('app.views.schedule.controller', [
                 }
             };
 
+            ///////////////////////////////////////
+            vm.onClickMonthPrevious = function(){
+                alert('TODO: add prev month');
+            };
+
+            ///////////////////////////////////////
+            vm.onClickMonthNext = function(){
+                alert('TODO: add next month');
+            };
+            ///////////////////////////////////////
+            vm.onClickRefresh = function(){
+                loadData();
+            };
 
             ///////////////////////////////////////
             var loadData = function () {
