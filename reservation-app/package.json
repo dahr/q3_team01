@@ -1,0 +1,48 @@
+{
+  "name": "reservation-app",
+  "version": "1.0.0",
+  "description": "UI Application for the lab server reservation system",
+  "main": "app.js",
+  "scripts": {
+    "start": "cd client && ../node_modules/.bin/gulp build  && cd .. && node server/server.js",
+    "clean": "rm -Rf node_modules/*",
+    "client": "cd client && ../node_modules/.bin/gulp && cd ..  ",
+    "server": "node server/server.js",
+    "debug": "node  --debug-brk=5858 server/server.js",
+    "monitor": "nodemon server/server.js",
+    "watch": "cd client && ../node_modules/.bin/gulp watch && cd .. ",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cd client && ../node_modules/.bin/bower install && cd .. "
+  },
+  "author": "Uwe Hale",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "ssh://uhale@gerrit.eng.vmware.com:29418/q3-team06t"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "bower": "^1.7.9",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "kafka-node": "^0.5.8",
+    "moment": "^2.15.1",
+    "multer": "^1.2.0",
+    "promise": "^7.1.1",
+    "request": "^2.74.0",
+    "yargs": "^5.0.0"
+  },
+  "devDependencies": {
+    "connect-livereload": "^0.5.4",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-bower-source": "0.0.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect": "^5.0.0",
+    "gulp-filter": "^4.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-ng-html2js": "^0.2.2",
+    "gulp-wrap": "^0.13.0",
+    "main-bower-files": "^2.13.1"
+  }
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+
+<html id="ng-app" ng-app="reservation-app" ng-controller="CtrlApp">
+
+<head>
+  <title ng-bind="appName"></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="pragma" content="no-cache">
+
+  <!-- vendor styles -->
+  <!--<link rel="stylesheet" href="css/bootstrap.min.css?v=APP_VERSION">-->
+  <!--<link rel="stylesheet" href="css/bootstrap-theme.min.css?v=APP_VERSION">-->
+  <!--<link rel="stylesheet" href="css/font-awesome.min.css?v=APP_VERSION">-->
+
+  <!-- app styles -->
+  <link rel="stylesheet" href="css/vendor.css?v=APP_VERSION">
+  <!--<link rel="stylesheet" href="css/app.css?v=APP_VERSION">-->
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <link rel="stylesheet" href="css/ie.css?v=APP_VERSION">
+  <script src="js/es5-shim.min.js?v=APP_VERSION"></script>
+  <script src="js/html5shiv.js?v=APP_VERSION"></script>
+  <script src="js/respond.min.js?v=APP_VERSION"></script>
+  <script>var isLtIe9 = true;</script>
+  <![endif]-->
+
+</head>
+
+<body layout="column">
+
+
+<div style="width: 100%">
+  <div ng-include="'common/toolbar.tpl.html'"></div>
+</div>
+
+<div layout="row">
+
+  <div ng-include="'common/menu_left.tpl.html'"></div>
+
+  <div layout="column" flex id="content">
+    <md-content layout="column" flex class="md-padding">
+      <!-- This is the main page that gets displayed. -->
+      <div ui-view>
+      </div>
+    </md-content>
+  </div>
+
+  <div ng-include="'common/menu_right.tpl.html'"></div>
+
+</div>
+
+
+<script src="js/vendor.js"></script>
+<script src="js/app.js"></script>
+<script src="js/app.templates.js"></script>
+</body>
+</html>

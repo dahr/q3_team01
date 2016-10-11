@@ -1,0 +1,28 @@
+<div class="menu_left" ng-hide="user === null">
+    <md-sidenav layout="column"
+                class="md-sidenav-left md-whiteframe-z2"
+                md-component-id="left"
+                md-is-locked-open="$mdMedia('gt-sm')">
+
+
+        <md-toolbar class="md-hue-2">
+            <div layout="column" class="md-toolbar-tools-bottom inset">
+                <div>Menu</div>
+            </div>
+        </md-toolbar>
+        <md-list layout="column">
+            <md-item>
+                <md-button ng-click="goToState('schedule_list')">
+                    Server Schedule
+                </md-button>
+            </md-item>
+            <md-item>
+                <md-button ng-click="goToState('servers_add')">
+                    Add Server
+                </md-button>
+            </md-item>
+
+        </md-list>
+
+    </md-sidenav>
+</div>

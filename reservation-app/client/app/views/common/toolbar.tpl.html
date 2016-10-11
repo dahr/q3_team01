@@ -1,0 +1,21 @@
+<md-toolbar layout="row" layout-align="start end">
+
+    <div class="md-toolbar-tools">
+
+        <md-button ng-click="toggleSidenav('left')" hide-gt-sm
+                   class="md-icon-button"
+                   ng-show="user !== null">
+            <ng-md-icon icon="menu" aria-label="Menu"></ng-md-icon>
+        </md-button>
+
+        <h1 class="md-toolbar-tools">Team 6 Server Reservation System</h1>
+
+        <!-- Span to move everything else to the right-->
+        <span flex> </span>
+        <md-button ng-click="toggleSidenav('right')"
+                   class="md-icon-button"
+                   ng-show="user !== null">
+            <ng-md-icon icon="settings" aria-label="Settings"></ng-md-icon>
+        </md-button>
+    </div>
+</md-toolbar>

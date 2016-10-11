@@ -1,0 +1,29 @@
+{
+  "name": "approval-service",
+  "version": "1.0.0",
+  "description": "Microservice app for getting and creating server approvals",
+  "main": "app.js",
+  "scripts": {
+    "clean": "rm -Rf node_modules/*",
+    "start": "node server/server.js",
+    "monitor": "nodemon server/server.js",
+    "debug": "node  --debug-brk=5858 server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Uwe Hale",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "ssh://uhale@gerrit.eng.vmware.com:29418/q3-team06t"
+  } ,
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "kafka-node": "^0.5.8",
+    "multer": "^1.2.0",
+    "promise": "^7.1.1",
+    "request": "^2.74.0"
+  },
+  "devDependencies": {}
+}

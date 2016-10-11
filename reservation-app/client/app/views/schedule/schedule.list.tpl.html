@@ -1,0 +1,78 @@
+<div>
+
+    <div layout="row" layout-align="space-between center">
+        <div></div>
+        <div>
+            <h2>
+
+            <ng-md-icon icon="chevron_left" aria-label="Previous" ng-click="vm.onClickMonthPrevious()"></ng-md-icon>
+            {{vm.data[0].month.text}}
+            <ng-md-icon icon="chevron_right" aria-label="Next" ng-click="vm.onClickMonthNext()"></ng-md-icon>
+            </h2>
+        </div>
+        <div>
+        <ng-md-icon icon="update" aria-label="Refresh" ng-click="vm.onClickRefresh()"></ng-md-icon>
+        </div>
+
+    </div>
+
+    <div ng-show="vm.data">
+        <md-content>
+
+
+            <md-list>
+
+                <md-list-item class="md-2-line" ng-repeat="server in vm.data">
+                    <!--TODO: Move to CSS-->
+                    <div class="md-list-item-text"
+                         ng-style="{'background-color':'lightgray', 'border':'solid black 1px'}">
+
+                        <div layout="row">
+                            <div flex="initial">
+                                <h3>{{server.name}} &nbsp; - &nbsp;</h3>
+                            </div>
+                            <div flex="grow">
+                                <p>{{server.description}}</p>
+                            </div>
+                        </div>
+
+                        <!--TODO: Move to CSS-->
+                        <div layout="row" layout-wrap
+                             ng-style="{'border-top':'solid black 1px','background-color':'white'}">
+                            <div flex="none" ng-repeat="day in server.month.days"
+
+                                 ng-style="day.approval.approved === 'APPROVED' &&
+                                 {'background-color':'pink','width':'27px'} ||
+                                 (day.approval.approved === 'PENDING' &&
+                                 {'background-color':'yellow','width':'27px'} ||
+                                 {'width':'27px'}) "
+                            >
+                                <div ng-click="vm.onClickDay(server, day)" ng-style="{'text-align': 'center'}">
+                                    {{day.idx}}
+                                </div>
+                                <md-tooltip ng-show="day.approval">
+                                    {{server.name }} is assigned
+                                    to {{ day.approval. user }}
+                                    on {{ day.date }}
+                                </md-tooltip>
+                            </div>
+                        </div>
+                        <div layout="row" layout-wrap>
+                        </div>
+
+
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </div>
+
+    <!--<div>-->
+    <!--<br/>-->
+    <!--<hr/>-->
+    <!--<h2>This is the raw data for dev </h2>-->
+    <!--<p>{{vm.data}}</p>-->
+
+    <!--</div>-->
+
+</div>

@@ -1,0 +1,28 @@
+<div class="menu_right" ng-hide="user === null">
+    <md-sidenav layout="column"
+                class="md-sidenav-right md-whiteframe-z2"
+                md-component-id="right">
+
+        <md-toolbar class="md-hue-2">
+            <div layout="column" class="md-toolbar-tools-bottom inset">
+
+                <div>{{user.name}}</div>
+                <div>{{user.email}}</div>
+            </div>
+        </md-toolbar>
+        <md-list layout="column">
+            <md-item>
+                <md-button ng-click="alert('TODO');">
+                    Settings
+                </md-button>
+            </md-item>
+            <md-item>
+                <md-button ng-click="logoutUser('login')">
+                    Logout
+                </md-button>
+            </md-item>
+        </md-list>
+
+
+    </md-sidenav>
+</div>
