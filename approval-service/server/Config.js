@@ -1,6 +1,6 @@
 var Config = {
-    teamNumber: '6',
-    teamParam: '?teamID=6',
+    teamNumber: '1',
+    teamParam: '?teamID=1',
 
     TOPIC_APPROVAL_REQUEST: 'APPROVAL_REQUEST',
 

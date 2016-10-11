@@ -1,5 +1,5 @@
 var Config = {
-    teamNumber: '6',
+    teamNumber: '1',
 
     TOPIC_SERVERCREATE_REQUEST: 'SERVERCREATE_REQUEST',
 

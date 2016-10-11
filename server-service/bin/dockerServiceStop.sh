@@ -5,7 +5,7 @@ service_name="server-service"
 
 #look for defined vars for the team name and port
 #else set to defaults
-if [ -z ${TEAM} ]; then TEAM="team6";fi
+if [ -z ${TEAM} ]; then TEAM="team1";fi
 
 
 project_dir="$(dirname $(cd -P -- "$(dirname -- "$0")" && pwd -P))"

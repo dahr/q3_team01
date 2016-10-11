@@ -9,7 +9,7 @@ NETWORK_INTERFACE='ens33'
 
 #look for defined vars for the team name
 #else set to defaults
-if [ -z ${TEAM} ]; then TEAM="team6";fi
+if [ -z ${TEAM} ]; then TEAM="team1";fi
 
 PROJECT_DIR="$(dirname $(cd -P -- "$(dirname -- "$0")" && pwd -P))"
 

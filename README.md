@@ -1,4 +1,4 @@
-Lab Server Reservation Ssytem
+Lab Server Reservation System
 =============================
 
 Node, Express, AngularJS Microservice app for handling the reservation of lab servers 
