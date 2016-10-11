@@ -4,7 +4,7 @@ var Promise = require('promise'),
 
 
 var messagingService = {
-    urlMsgClient: config.url.messagingService,
+    urlMsgClient: config.url.messagingProducer,
 
     postMessage: function (topic, message) {
 

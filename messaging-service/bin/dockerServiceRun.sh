@@ -25,15 +25,15 @@ if [ -z ${LOCAL_IP} ]; then LOCAL_IP=`ip -f inet -o addr show ${NETWORK_INTERFAC
 
 echo ${LOCAL_IP}
 
+# --env ADVERTISED_HOST=${LOCAL_IP} \
+# --env ADVERTISED_PORT=${CONSUMER_PORT} \
+
 docker run -p ${ZOOKEEPER_PORT}:2181 -p ${CONSUMER_PORT}:9092 \
- --env ADVERTISED_HOST=${LOCAL_IP} \
- --env ADVERTISED_PORT=${CONSUMER_PORT} \
- --env TOPICS=APPROVAL_REQUEST,SERVERCREATE_REQUEST \
 --name "${TEAM}-${SERVICE_NAME}" -d ${TEAM}/${SERVICE_NAME}
 
 # TODO find another way to setup the initial topics
 # the topics env var does not seem to create them.
 sleep 5
 
-docker exec team6-messaging-service /opt/kafka_2.11-0.8.2.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic APPROVAL_REQUEST
-docker exec team6-messaging-service /opt/kafka_2.11-0.8.2.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic SERVERCREATE_REQUEST
+docker exec team6-messaging-service /opt/kafka_2.11-0.8.2.1/bin/kafka-topics.sh --create --zookeeper kafka:2181 --replication-factor 1 --partitions 1 --topic TEAM6_APPROVAL_REQUEST
+docker exec team6-messaging-service /opt/kafka_2.11-0.8.2.1/bin/kafka-topics.sh --create --zookeeper kafka:2181 --replication-factor 1 --partitions 1 --topic TEAM6_SERVERCREATE_REQUEST

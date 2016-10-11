@@ -27,7 +27,8 @@ router.post('/', function (req, res) {
         .then(
             function (data) {
                 console.log('Finished Posting New Server' + JSON.stringify(data));
-                res.send(data);
+                newServer.response = data;
+                res.send(newServer);
             },
             function (error) {
                 console.log('ERROR Posting New Server:' + JSON.stringify(newServer) + JSON.stringify(error));
