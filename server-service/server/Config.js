@@ -1,7 +1,7 @@
 var Config = {
     teamNumber: '1',
 
-    TOPIC_SERVERCREATE_REQUEST: 'team1_SERVERCREATE_REQUEST',
+    TOPIC_SERVERCREATE_REQUEST: 'TEAM1_SERVERCREATE_REQUEST',
 
     url: {
         messagingService: (function () {

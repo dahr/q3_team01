@@ -3,6 +3,7 @@
 service_name="server-service"
 default_port="8091"
 message_service="messaging-service"
+NETWORK_INTERFACE="ens33"
 
 #look for defined vars for the team name and port
 #else set to defaults

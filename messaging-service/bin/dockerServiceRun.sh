@@ -35,5 +35,5 @@ docker run -p ${ZOOKEEPER_PORT}:2181 -p ${CONSUMER_PORT}:9092 \
 # the topics env var does not seem to create them.
 sleep 5
 
-docker exec team1-messaging-service /opt/kafka_2.11-0.8.2.1/bin/kafka-topics.sh --create --zookeeper kafka:2181 --replication-factor 1 --partitions 1 --topic team1_APPROVAL_REQUEST
-docker exec team1-messaging-service /opt/kafka_2.11-0.8.2.1/bin/kafka-topics.sh --create --zookeeper kafka:2181 --replication-factor 1 --partitions 1 --topic team1_SERVERCREATE_REQUEST
+docker exec team1-messaging-service /opt/kafka_2.11-0.8.2.1/bin/kafka-topics.sh --create --zookeeper 10.162.231.12:2181 --replication-factor 1 --partitions 1 --topic TEAM1_APPROVAL_REQUEST
+docker exec team1-messaging-service /opt/kafka_2.11-0.8.2.1/bin/kafka-topics.sh --create --zookeeper 10.162.231.12:2181 --replication-factor 1 --partitions 1 --topic TEAM1_SERVERCREATE_REQUEST
