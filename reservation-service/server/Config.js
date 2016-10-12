@@ -1,6 +1,6 @@
 var Config = {
-    teamNumber: '1',
-    teamParam: '?teamID=1',
+    teamNumber: '6',
+    teamParam: '?teamID=6',
 
     url: {
         approvalService: (function () {

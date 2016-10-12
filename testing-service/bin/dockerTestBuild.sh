@@ -1,6 +1,6 @@
 #!/bin/bash
 
-service_name="server-service"
+service_name="testing-service"
 
 if [ -z ${TEAM} ]; then TEAM="team6";fi
 project_dir="$(dirname $(cd -P -- "$(dirname -- "$0")" && pwd -P))"

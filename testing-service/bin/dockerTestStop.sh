@@ -1,6 +1,6 @@
 #!/bin/bash
 
-service_name="reservation-service"
+service_name="testing-service"
 
 
 #look for defined vars for the team name and port
@@ -10,8 +10,6 @@ if [ -z ${TEAM} ]; then TEAM="team6";fi
 project_dir="$(dirname $(cd -P -- "$(dirname -- "$0")" && pwd -P))"
 
 echo "Stopping ${service_name} Docker image for ${TEAM} from ${project_dir}"
-
-container_id=`docker ps -aqf name="${TEAM}-${service_name}"`
 
 container_id=`docker ps -aqf name="${TEAM}-${service_name}"`
 
