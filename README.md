@@ -31,7 +31,7 @@ Use docker-compose as follows:
 
 Build & Start  (add `-d` optionally to run in background):
 ```
-export SERVER_SERVICE_PORT=$DOCKER_HOST
+export SERVER_SERVICE_LOCAL_IP=$DOCKER_HOST
 docker-compose up --build
 ```
 _Note: if you do not have a DOCKER_HOST environment variable set, you should replace `$DOCKER_HOST` above with your host machine's ip address._

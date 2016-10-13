@@ -8,7 +8,7 @@ services:
     links:
       - messaging-service
     environment:
-      ADVERTISED_HOST: ${SERVER_SERVICE_PORT}
+      ADVERTISED_HOST: ${SERVER_SERVICE_LOCAL_IP}
     ports:
       - 8091:8091
 
