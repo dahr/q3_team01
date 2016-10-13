@@ -9,6 +9,7 @@ Node, Express, AngularJS Microservice app for handling the reservation of lab se
 If you only want to install and run the application, then all you need is 
 
 - [Docker] (https://docs.docker.com/engine/installation/)
+- [Docker Compose] (https://docs.docker.com/compose/install/)
 - [git] (https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 For doing development work, you will need to have these installed in your
@@ -26,19 +27,23 @@ git clone ssh://${LOGNAME}@gerrit.eng.vmware.com:29418/q3-team06 && scp -p -P 29
 ```
 
 ## Build, Run, and Stop
-You can now build and run all the services and the app in docker containers using the Dockerfile. 
-See contents of bash scripts for examples to manually run docker commands
+Use docker-compose as follows:
 
+Build & Start  (add `-d` optionally to run in background):
 ```
-./bin/dockerBuild.sh
+export SERVER_SERVICE_PORT=$DOCKER_HOST
+docker-compose up --build
+```
+_Note: if you do not have a DOCKER_HOST environment variable set, you should replace `$DOCKER_HOST` above with your host machine's ip address._
+
+Stop
+```
+docker-compose stop
 ```
 
+Remove stopped containers
 ```
-./bin/dockerRun.sh
-```
-
-```
-./bin/dockerStop.sh
+docker-compose rm
 ```
 
 ## Services
