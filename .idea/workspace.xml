@@ -49,8 +49,8 @@
       <file leaf-file-name="Jenkinsfile" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Jenkinsfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+            <state relative-caret-position="51">
+              <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -323,7 +323,7 @@
       <workItem from="1476283771404" duration="480000" />
       <workItem from="1476352426176" duration="869000" />
       <workItem from="1476353352999" duration="3060000" />
-      <workItem from="1476460866639" duration="3296000" />
+      <workItem from="1476460866639" duration="3317000" />
     </task>
     <task id="LOCAL-00001" summary="New Jenkinsfile with docker-compose calls">
       <created>1476462085163</created>
@@ -339,11 +339,18 @@
       <option name="project" value="LOCAL" />
       <updated>1476462365878</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fix typo in Jenkinsfile">
+      <created>1476467893445</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1476467893445</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18928000" />
+    <option name="totallyTimeSpent" value="18949000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="360" y="22" width="1920" height="2084" extended-state="0" />
@@ -754,8 +761,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Jenkinsfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        <state relative-caret-position="51">
+          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
           <folding />
         </state>
       </provider>
