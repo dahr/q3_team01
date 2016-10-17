@@ -11,16 +11,16 @@ services:
       - messaging-service
     environment:
       ADVERTISED_HOST: ${SERVER_SERVICE_LOCAL_IP}
-    ports:
-      - 8091:8091
+    expose:
+      - 8091
 
   messaging-service:
     build: messaging-service
     image: team1/messaging-service
     container_name: ${OWNER}-messaging-service
-    ports:
-      - 2181:2181
-      - 9092:9092
+    expose:
+      - 2181
+      - 9092
 
   approval-service:
     build: approval-service
@@ -30,8 +30,8 @@ services:
       - messaging-service
     depends_on:
       - messaging-service
-    ports:
-      - 8092:8092
+    expose:
+      - 8092
 
   reservation-service:
     build: reservation-service
@@ -45,8 +45,8 @@ services:
     environment:
       SERVER_SERVICE: "http://server-service:8091"
       APPROVAL_SERVICE: "http://approval-service:8092"
-    ports:
-      - 8093:8093
+    expose:
+      - 8093
 
   reservation-app:
     build: reservation-app
@@ -61,5 +61,5 @@ services:
     environment:
       RESERVATION_SERVICE: "http://reservation-service:8093"
       SERVER_SERVICE: "http://server-service:8091"
-    ports:
-      - 8090:8090
+    expose:
+      - 8090

@@ -1,5 +1,6 @@
 node ('docker'){
   env.OWNER = "team01-${env.GIT_BRANCH}"
+  env.BASE_PORT = 20000
   stage 'Checkout'
   checkout scm
 
