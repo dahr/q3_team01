@@ -1,5 +1,5 @@
 node ('docker'){
-  env.OWNER = "team01-${GIT_BRANCH}"
+  env.OWNER = "team01-${env.GIT_BRANCH}"
   stage 'Checkout'
   checkout scm
 
