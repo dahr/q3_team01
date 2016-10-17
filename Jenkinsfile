@@ -1,8 +1,7 @@
 node ('docker'){
-  env.OWNER = "team01-${env.GIT_BRANCH}"
-  env.BASE_PORT = 20000
   stage 'Checkout'
   checkout scm
+  env.OWNER = "team01-${env.GIT_BRANCH}"
 
   withDockerServer([uri: 'tcp://192.168.110.89:2376']) {
     stage 'Build Containers'
