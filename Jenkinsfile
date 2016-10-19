@@ -8,6 +8,6 @@ node ('docker'){
     sh 'docker-compose build'
 
     stage 'Start application'
-    sh 'docker-compose up -d'
+    sh 'docker-compose up -d --remove-orphans'
   }
 }
