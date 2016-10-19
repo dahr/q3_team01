@@ -93,8 +93,11 @@ services:
        - reservation-app
     environment:
       RS_HOST: "reservation-app"
+      PORT: 8090
       RESERVATION_HOST: "reservation-service"
       SERVER_HOST: "server-service"
+      SERVER_PORT: 8091
       APPROVAL_HOST: "approval-service"
+      APPROVAL_PORT: 8092
     ports:
       - 3000:3000
