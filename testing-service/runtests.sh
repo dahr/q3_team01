@@ -1,7 +1,8 @@
 #!/bin/bash
 
-/opt/SoapUI/bin/testrunner.sh \
--s"Basic Function Suite" \
--r -a \
--f/home/app/reports/ \
-/home/app/Q3-Training-Tests-soapui-project.xml
+
+
+project_dir="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+
+
+curl --form "project=@${project_dir}/Q3-Training-Tests-soapui-project.xml"  --form "suite=Basic Function Suite" http://localhost:3000l
