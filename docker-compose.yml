@@ -5,14 +5,14 @@ services:
   zookeeper-service:
     image: wurstmeister/zookeeper
     hostname: zookeeper-service
-    container_name: ${OWNER}-zookeeper-service
+    container_name: team01-zookeeper-service
     ports:
       - 2181:2181
 
   kafka-service:
     image: wurstmeister/kafka
     hostname: kafka-service
-    container_name: ${OWNER}-kafka-service
+    container_name: team01-kafka-service
     depends_on:
       - zookeeper-service
     ports:
@@ -30,7 +30,7 @@ services:
     build: ./server-service
     hostname: server-service
     image: team1/server-service
-    container_name: ${OWNER}-server-service
+    container_name: team01-server-service
     links:
       - zookeeper-service
     depends_on:
@@ -44,7 +44,7 @@ services:
     build: ./approval-service
     hostname: approval-service
     image: team1/approval-service
-    container_name: ${OWNER}-approval-service
+    container_name: team01-approval-service
     links:
       - zookeeper-service
     depends_on:
@@ -58,7 +58,7 @@ services:
     build: ./reservation-service
     hostname: reservation-service
     image: team1/reservation-service
-    container_name: ${OWNER}-reservation-service
+    container_name: team01-reservation-service
     environment:
       SERVER_SERVICE: "http://server-service:8091"
       APPROVAL_SERVICE: "http://approval-service:8092"
@@ -69,7 +69,7 @@ services:
     build: ./reservation-app
     hostname: reservation-app
     image: team1/reservation-app
-    container_name: ${OWNER}-reservation-app
+    container_name: team01-reservation-app
     links:
       - kafka-service
     depends_on:
@@ -85,7 +85,7 @@ services:
     build: ./testing-service
     hostname: testing-service
     image: team1/testing-service
-    container_name: ${OWNER}-testing-service
+    container_name: team01-testing-service
     depends_on:
        - approval-service
        - server-service
