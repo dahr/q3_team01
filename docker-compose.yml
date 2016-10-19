@@ -1,41 +1,64 @@
 version: '2'
 
 services:
-  server-service:
-    build: server-service
-    image: team1/server-service
-    container_name: team1-server-service
-    links:
-      - messaging-service
+
+  zookeeper-service:
+    image: wurstmeister/zookeeper
+    hostname: zookeeper-service
+    container_name: team01-zookeeper-service
+    ports:
+      - 2181:2181
+
+  kafka-service:
+    image: wurstmeister/kafka
+    hostname: kafka-service
+    container_name: team01-kafka-service
+    depends_on:
+      - zookeeper-service
+    ports:
+      - 9092:9092
     environment:
-      ADVERTISED_HOST: ${SERVER_SERVICE_LOCAL_IP}
+      KAFKA_ADVERTISED_HOST_NAME: kafka-service
+      KAFKA_ADVERTISED_PORT: 9092
+      KAFKA_CREATE_TOPICS: "TEAM1_SERVERCREATE_REQUEST:1:1,TEAM1_APPROVAL_REQUEST:1:1,test:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-service:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+
+  server-service:
+    build: ./server-service
+    hostname: server-service
+    image: team1/server-service
+    container_name: team01-server-service
+    links:
+      - zookeeper-service
+    depends_on:
+      - zookeeper-service
+    environment:
+      MESSAGING_SERVICE: "zookeeper-service:2181"
     ports:
       - 8091:8091
 
-  messaging-service:
-    build: messaging-service
-    image: team1/messaging-service
-    container_name: team1-messaging-service
-    ports:
-      - 2181:2181
-      - 9092:9092
-
   approval-service:
-    build: approval-service
+    build: ./approval-service
+    hostname: approval-service
     image: team1/approval-service
-    container_name: team1-approval-service
+    container_name: team01-approval-service
     links:
-      - messaging-service
+      - zookeeper-service
+    depends_on:
+      - zookeeper-service
+    environment:
+      MESSAGING_SERVICE: "zookeeper-service:2181"
     ports:
       - 8092:8092
 
   reservation-service:
-    build: reservation-service
+    build: ./reservation-service
+    hostname: reservation-service
     image: team1/reservation-service
-    container_name: team1-reservation-service
-    links:
-      - server-service
-      - approval-service
+    container_name: team01-reservation-service
     environment:
       SERVER_SERVICE: "http://server-service:8091"
       APPROVAL_SERVICE: "http://approval-service:8092"
@@ -43,15 +66,35 @@ services:
       - 8093:8093
 
   reservation-app:
-    build: reservation-app
+    build: ./reservation-app
+    hostname: reservation-app
     image: team1/reservation-app
-    container_name: team1-reservation-app
+    container_name: team01-reservation-app
     links:
-      - messaging-service
-      - reservation-service
-      - server-service
+      - kafka-service
+    depends_on:
+      - kafka-service
     environment:
-      RESERVATION_SERVICE: "http://reservation-service:8092"
+      MESSAGING_SERVICE: "zookeeper-service:2181"
+      RESERVATION_SERVICE: "http://reservation-service:8093"
       SERVER_SERVICE: "http://server-service:8091"
     ports:
       - 8090:8090
+
+  testing-service:
+    build: ./testing-service
+    hostname: testing-service
+    image: team1/testing-service
+    container_name: team01-testing-service
+    depends_on:
+       - approval-service
+       - server-service
+       - reservation-service
+       - reservation-app
+    environment:
+      RS_HOST: "reservation-app"
+      RESERVATION_HOST: "reservation-service"
+      SERVER_HOST: "server-service"
+      APPROVAL_HOST: "approval-service"
+    ports:
+      - 3000:3000
