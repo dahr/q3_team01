@@ -1,4 +1,4 @@
-FROM uwehale/alpine-node-bower-git:latest
+FROM uwehale/alpine-node-bower-git-python:latest
 MAINTAINER Uwe hale "uwehale@gmail.com"
 
 
@@ -16,5 +16,4 @@ RUN npm run client
 
 EXPOSE 8081
 
-CMD [ "npm", "run", "server"]
-
+CMD [ "/home/app/bin/startWait.sh", "npm", "run", "server"]
