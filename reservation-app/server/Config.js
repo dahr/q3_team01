@@ -7,7 +7,7 @@ var Config = {
     url: {
 
         messagingProducer: (function () {
-            return process.env.MESSAGING_SERVICE ? process.env.MESSAGINGSERVICE : 'kafka:2181';
+            return process.env.MESSAGING_SERVICE ? process.env.MESSAGING_SERVICE : 'localhost:2181';
         })(),
         reservationService: (function () {
             return process.env.RESERVATION_SERVICE ? process.env.RESERVATION_SERVICE + '/api/reservations' : 'http://localhost:8093/api/reservations';

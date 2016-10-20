@@ -9,7 +9,8 @@ var express = require('express'),
  */
 router.get('/', function (req, res) {
 
-    reservationService.getReservations()
+    var date = req.query.date;
+    reservationService.getReservations(null, date)
         .then(
             function (data) {
                 console.log('Reservation List' + JSON.stringify(data));
@@ -26,7 +27,7 @@ router.get('/', function (req, res) {
  */
 router.get('/:id', function (req, res) {
 
-    reservationService.getReservations(req.param('id'))
+    reservationService.getReservations(req.param('id'), null)
         .then(
             function (data) {
                 console.log('Reservation' + JSON.stringify(data));

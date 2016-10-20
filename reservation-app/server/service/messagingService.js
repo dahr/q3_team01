@@ -20,7 +20,10 @@ var messagingService = {
 
             var kafkaProducer = new kafka.HighLevelProducer(new kafka.Client(_self.urlMsgClient));
 
+
+            console.log('Creating Producer:' + kafkaProducer.client.clientId + ' ' + kafkaProducer.client.connectionString);
             kafkaProducer.on('ready', function () {
+                console.log('Sending Payload:' + JSON.stringify(payloads));
                 kafkaProducer.send(payloads,
                     function (err, data) {
                         if(err){

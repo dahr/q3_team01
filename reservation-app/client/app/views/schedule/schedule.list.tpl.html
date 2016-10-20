@@ -1,6 +1,9 @@
 <div>
 
-    <div layout="row" layout-align="space-between center">
+
+
+
+    <div layout="row" layout-align="space-between center"  ng-show="vm.status.loaded">
         <div></div>
         <div>
             <h2>
@@ -16,7 +19,11 @@
 
     </div>
 
-    <div ng-show="vm.data">
+    <div layout="row" layout-sm="column" layout-align="space-around" ng-show="vm.status.waiting">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div ng-show="vm.status.loaded">
         <md-content>
 
 

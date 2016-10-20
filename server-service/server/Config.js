@@ -5,7 +5,7 @@ var Config = {
 
     url: {
         messagingService: (function () {
-            return process.env.MESSAGING_SERVICE ? process.env.MESSAGINGSERVICE :  'kafka:2181';
+            return process.env.MESSAGING_SERVICE ? process.env.MESSAGING_SERVICE :  'localhost:2181';
         })(),
         blobs: 'http://blobs.vmwaredevops.appspot.com/api/v1/blobs'
 

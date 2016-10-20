@@ -16,9 +16,10 @@ reservation = {
      * Gets an array of reservations.
      * Can be filtered by the reservation id
      * @param id
+     * @param date
      * @returns {*}
      */
-    getReservations: function (id) {
+    getReservations: function (id, date) {
 
         var options = {
             url: this.urlBase,
@@ -31,7 +32,7 @@ reservation = {
 
         return new Promise(function (resolve, reject) {
 
-            request.get(options, function (error, response, body) {
+            request.get(options.url, {qs: {date: date }}, function (error, response, body) {
 
                 var errorsFound = errorHandler.hasErrors(options, error, response);
                 if (errorsFound) {

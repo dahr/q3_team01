@@ -3,9 +3,9 @@
 angular.module('app.services.reservations', [])
     .service('ReservationsService', function ($http) {
 
-        this.getReservations = function () {
+        this.getReservations = function (dayMonthString) {
 
-            return $http.get('/api/reservations')
+            return $http.get('/api/reservations', {params: {date: dayMonthString}} )
                 .then(function (response) {
                     return response.data;
                 });

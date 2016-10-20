@@ -16,7 +16,7 @@ var kafka = require('kafka-node'),
     );
 
 
-    console.log('Creating Event Handler for Server Create');
+    console.log('Creating Event Handler for Server Create:' + consumer.client.clientId + ' ' + consumer.client.connectionString);
     consumer.on('message', function (message) {
         console.log('Kafka Topic:' + message.topic + ' Kafka Message:' + message.value);
 

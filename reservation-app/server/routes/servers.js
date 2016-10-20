@@ -26,8 +26,8 @@ router.post('/', function (req, res) {
     messagingService.postMessage(config.TOPIC_SERVERCREATE_REQUEST, newServer)
         .then(
             function (data) {
-                console.log('Finished Posting New Server' + JSON.stringify(data));
                 newServer.response = data;
+                console.log('Finished Posting New Server' + JSON.stringify(data));
                 res.send(newServer);
             },
             function (error) {

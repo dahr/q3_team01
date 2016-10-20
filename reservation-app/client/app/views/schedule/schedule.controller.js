@@ -13,6 +13,9 @@ angular.module('app.views.schedule.controller', [
 
             var vm = this;
             vm.data = [];
+            vm.currentDate = moment();
+            vm.status = {loaded: false, waiting: true};
+
 
             $scope.checkLogin();
 
@@ -59,23 +62,26 @@ angular.module('app.views.schedule.controller', [
             };
 
             ///////////////////////////////////////
-            vm.onClickMonthPrevious = function(){
-                alert('TODO: add prev month');
+            vm.onClickMonthPrevious = function () {
+                vm.currentDate.subtract(1, 'M');
+                loadData();
             };
 
             ///////////////////////////////////////
-            vm.onClickMonthNext = function(){
-                alert('TODO: add next month');
+            vm.onClickMonthNext = function () {
+                vm.currentDate.add(1, 'M');
+                loadData();
             };
             ///////////////////////////////////////
-            vm.onClickRefresh = function(){
+            vm.onClickRefresh = function () {
                 loadData();
             };
 
             ///////////////////////////////////////
             var loadData = function () {
-
-                ReservationsService.getReservations()
+                vm.status.loaded = false;
+                vm.status.waiting = true;
+                ReservationsService.getReservations(vm.currentDate.format('YYYYMM'))
                     .then(function (data) {
 
                         data.forEach(function (server) {
@@ -85,7 +91,7 @@ angular.module('app.views.schedule.controller', [
                                 server.approvalList.forEach(function (approval) {
                                     if (day.raw.format('YYYYMMDD') === approval.description.date) {
                                         day.approval = approval.description;
-                                        day.approval.approved = approval.approved ? 'APPROVED': 'PENDING';
+                                        day.approval.approved = approval.approved ? 'APPROVED' : 'PENDING';
                                     }
                                 });
 
@@ -95,24 +101,29 @@ angular.module('app.views.schedule.controller', [
                         });
 
                         vm.data = data;
+                        vm.status.loaded = true;
+                    })
+                    .finally(function () {
+                        vm.status.waiting = false;
                     });
             };
 
 
             ///////////////////////////////////////
             function getDaysArrayByMonth() {
-                var now = moment();
-                var daysInMonth = now.daysInMonth();
+                var daysInMonth = vm.currentDate.daysInMonth();
                 var month = {};
                 month.days = [];
 
-                month.text = now.format('MMMM');
-                month.number = now.format('M');
+                month.text = vm.currentDate.format('MMMM YYYY');
+                month.number = vm.currentDate.format('M');
 
                 var formatL = moment.localeData().longDateFormat('L');
 
                 for (var idx = 1; idx <= daysInMonth; idx++) {
-                    var day = moment().date(idx);
+                    var day = moment(vm.currentDate);
+                    day = day.date(idx);
+
                     month.days.push({
                         idx: idx,
                         raw: day,
@@ -127,7 +138,7 @@ angular.module('app.views.schedule.controller', [
             ///////////////////////////////////////
             function createReservation(reservation) {
                 ReservationsService.createReservation(reservation)
-                    .then(function(){
+                    .then(function () {
                         loadData();
                     })
             }

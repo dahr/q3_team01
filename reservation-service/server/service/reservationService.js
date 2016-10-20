@@ -19,13 +19,13 @@ var reservation = {
      * Filer by id if passed
      * @returns {*}
      */
-    getReservations: function (id) {
+    getReservations: function (id, date) {
         _self = this;
 
         return new Promise(function (resolve, reject) {
             _self.getServers()
                 .then(function (serverList) {
-                    _self.getApprovals()
+                    _self.getApprovals(date)
                         .then(function (approvalList) {
                             _self.calculateApprovedServers(serverList, approvalList, id)
                                 .then(function (approvedServers) {
@@ -63,7 +63,7 @@ var reservation = {
         })
     },
 
-    getApprovals: function () {
+    getApprovals: function (date) {
         var options = {
             url: this.urlApprovals,
             method: 'GET'
@@ -71,7 +71,7 @@ var reservation = {
 
         return new Promise(function (resolve, reject) {
 
-            request.get(options, function (error, response, body) {
+            request.get(options.url, {qs: {date: date }}, function (error, response, body) {
                 var errorsFound = errorHandler.hasErrors(options, error, response);
                 if (errorsFound) {
                     return reject(errorsFound);
