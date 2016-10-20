@@ -91,6 +91,8 @@ services:
        - server-service
        - reservation-service
        - reservation-app
+    links:
+       - reservation-app
     environment:
       RS_HOST: "reservation-app"
       PORT: 8090
