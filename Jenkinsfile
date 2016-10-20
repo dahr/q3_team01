@@ -1,7 +1,7 @@
 node ('docker'){
   stage 'Checkout'
   checkout scm
-  env.OWNER = "team01-${env.GIT_BRANCH}"
+  env.OWNER = "team01"
 
   withDockerServer([uri: 'tcp://192.168.110.89:2376']) {
     stage 'Build Containers'
@@ -10,7 +10,6 @@ node ('docker'){
     stage 'Start application'
     sh 'docker-compose up -d --remove-orphans'
 
-    input message: "Ready to test?"
     stage 'Run Tests'
     sh 'testing-service/runtests.sh'
   }
