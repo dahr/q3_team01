@@ -7,6 +7,10 @@ node ('docker'){
     stage 'Build Containers'
     sh 'docker-compose build'
 
+    stage 'Stop and remove old deployment'
+    sh 'docker-compose kill'
+    sh 'docker-compose rm -af'
+
     stage 'Start application'
     sh 'docker-compose up -d --remove-orphans'
 
