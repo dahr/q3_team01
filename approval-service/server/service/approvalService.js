@@ -21,7 +21,7 @@ var approvalService = {
      * Get all the approvals in an array
      * @returns {*}
      */
-    getApprovals: function () {
+    getApprovals: function (date) {
         var options = {
             url: this.urlTeam,
             method: 'GET'
@@ -51,7 +51,18 @@ var approvalService = {
                             }
                             // filter out bad data
                             approvablesResponseValidator.validate(approvalResponse);
-                            convertedResponse.push(approvalResponse);
+
+
+                            if (date) {
+                                if (approvalResponse.description.date.toString().startsWith(date)) {
+                                    convertedResponse.push(approvalResponse);
+                                }
+
+                            } else {
+                                convertedResponse.push(approvalResponse);
+                            }
+
+
                         } catch (e) {
                             if (e instanceof ApprovablesResponseException) {
                                 console.log(e + '\nIgnoring Invalid Approval:' + JSON.stringify(approvalResponse));
@@ -192,7 +203,6 @@ var approvalService = {
             });
         });
     },
-
 
 
     checkForDuplicates: function (currentApprovals, serverInfo) {
