@@ -10,6 +10,7 @@ node ('docker'){
     stage 'Start application'
     sh 'docker-compose up -d --remove-orphans'
 
+    input message: "Ready to test?"
     stage 'Run Tests'
     sh 'testing-service/runtests.sh'
   }
