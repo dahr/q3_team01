@@ -95,7 +95,7 @@ services:
        - reservation-app
        - server-service
     environment:
-      RS_HOST: "192.168.110.89"
+      RS_HOST: "reservation-app"
       RESERVATION_HOST: "reservation-service"
       SERVER_HOST: "server-service"
       APPROVAL_HOST: "approval-service"
