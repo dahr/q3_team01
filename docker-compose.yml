@@ -72,6 +72,8 @@ services:
     container_name: team01-reservation-app
     links:
       - kafka-service
+      - zookeeper-service
+      - reservation-service
     depends_on:
       - kafka-service
     environment:
