@@ -92,7 +92,6 @@ services:
        - approval-service
        - server-service
        - reservation-service
-       - reservation-app
     links:
        - reservation-app
        - server-service
