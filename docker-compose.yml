@@ -5,14 +5,14 @@ services:
   zookeeper-service:
     image: wurstmeister/zookeeper
     hostname: zookeeper-service
-    container_name: team01-zookeeper-service
+    container_name: team6-zookeeper-service
     ports:
       - 2181:2181
 
   kafka-service:
     image: wurstmeister/kafka
     hostname: kafka-service
-    container_name: team01-kafka-service
+    container_name: team6-kafka-service
     depends_on:
       - zookeeper-service
     ports:
@@ -20,7 +20,7 @@ services:
     environment:
       KAFKA_ADVERTISED_HOST_NAME: kafka-service
       KAFKA_ADVERTISED_PORT: 9092
-      KAFKA_CREATE_TOPICS: "TEAM1_SERVERCREATE_REQUEST:1:1,TEAM1_APPROVAL_REQUEST:1:1,test:1:1"
+      KAFKA_CREATE_TOPICS: "TEAM6_SERVERCREATE_REQUEST:1:1,TEAM6_APPROVAL_REQUEST:1:1,test:1:1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper-service:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -29,8 +29,8 @@ services:
   server-service:
     build: ./server-service
     hostname: server-service
-    image: team1/server-service
-    container_name: team01-server-service
+    image: team6/server-service
+    container_name: team6-server-service
     links:
       - zookeeper-service
     depends_on:
@@ -43,8 +43,8 @@ services:
   approval-service:
     build: ./approval-service
     hostname: approval-service
-    image: team1/approval-service
-    container_name: team01-approval-service
+    image: team6/approval-service
+    container_name: team6-approval-service
     links:
       - zookeeper-service
     depends_on:
@@ -57,8 +57,8 @@ services:
   reservation-service:
     build: ./reservation-service
     hostname: reservation-service
-    image: team1/reservation-service
-    container_name: team01-reservation-service
+    image: team6/reservation-service
+    container_name: team6-reservation-service
     environment:
       SERVER_SERVICE: "http://server-service:8091"
       APPROVAL_SERVICE: "http://approval-service:8092"
@@ -68,12 +68,10 @@ services:
   reservation-app:
     build: ./reservation-app
     hostname: reservation-app
-    image: team1/reservation-app
-    container_name: team01-reservation-app
+    image: team6/reservation-app
+    container_name: team6-reservation-app
     links:
       - kafka-service
-      - zookeeper-service
-      - reservation-service
     depends_on:
       - kafka-service
     environment:
@@ -86,15 +84,13 @@ services:
   testing-service:
     build: ./testing-service
     hostname: testing-service
-    image: team1/testing-service
-    container_name: team01-testing-service
+    image: team6/testing-service
+    container_name: team6-testing-service
     depends_on:
        - approval-service
        - server-service
        - reservation-service
-    links:
        - reservation-app
-       - server-service
     environment:
       RS_HOST: "reservation-app"
       RESERVATION_HOST: "reservation-service"
