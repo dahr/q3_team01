@@ -3,17 +3,19 @@ node {
   checkout scm
   env.OWNER = "team01"
 
-  stage 'Build Containers'
-  sh 'docker-compose build'
+  withDockerServer([uri: 'tcp://192.168.110.89:2376']) {
+    stage 'Build Containers'
+    sh 'docker-compose build'
 
-  stage 'Stop and remove old deployment'
-  sh 'docker-compose kill'
-  sh 'docker-compose rm -af'
+    stage 'Stop and remove old deployment'
+    sh 'docker-compose kill'
+    sh 'docker-compose rm -af'
 
-  stage 'Start application'
-  sh 'docker-compose up -d --remove-orphans'
+    stage 'Start application'
+    sh 'docker-compose up -d --remove-orphans'
 
-  input message: "Ready to test?"
-  stage 'Run Tests'
-  sh 'testing-service/runtests.sh'
+    input message: "Ready to test?"
+    stage 'Run Tests'
+    sh 'testing-service/runtests.sh'
+  }
 }
