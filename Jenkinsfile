@@ -3,7 +3,7 @@ node {
   checkout scm
   env.OWNER = "team01"
 
-  withDockerServer([uri: 'tcp://192.168.110.89:2376']) {
+  withDockerServer([uri: 'tcp://10.0.1.3:2376']) {
     stage 'Build Containers'
     sh 'docker-compose build'
 
