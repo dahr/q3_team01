@@ -1,4 +1,4 @@
-node('docker' {
+node('docker') {
   stage 'Checkout'
   checkout scm
   env.OWNER = "team01"
