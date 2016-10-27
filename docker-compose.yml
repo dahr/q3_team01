@@ -98,3 +98,4 @@ services:
       APPROVAL_HOST: "approval-service"
     ports:
       - 3000:3000
+
