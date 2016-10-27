@@ -49,6 +49,7 @@ services:
       - zookeeper-service
     depends_on:
       - zookeeper-service
+      - kafka-service
     environment:
       MESSAGING_SERVICE: "zookeeper-service:2181"
     ports:
