@@ -15,6 +15,7 @@ node {
 
 
   stage 'Run Tests'
+  sh 'sleep 30'
   sh 'testing-service/runtests.sh'
   sh "docker cp team1-testing-service:/home/app/TEST-Basic_Function_Suite.xml ."
   step([$class: 'JUnitResultArchiver', testResults: 'TEST-Basic_Function_Suite.xml'])
