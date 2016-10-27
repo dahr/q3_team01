@@ -2,6 +2,7 @@ node('docker') {
   stage 'Checkout'
   checkout scm
   env.OWNER = "team1"
+  env.DOCKER_API_VERSION = "1.23"
 
   withDockerServer([uri: 'tcp://192.168.110.89:2376']) {
     stage 'Build Containers'
