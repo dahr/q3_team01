@@ -10,7 +10,7 @@ services:
       - 2181:2181
 
   kafka-service:
-    image: wurstmeister/kafka
+    image: ericsmalling/kafka-docker
     hostname: kafka-service
     container_name: team1-kafka-service
     depends_on:
@@ -49,6 +49,7 @@ services:
       - zookeeper-service
     depends_on:
       - zookeeper-service
+      - kafka-service
     environment:
       MESSAGING_SERVICE: "zookeeper-service:2181"
     ports:
@@ -98,3 +99,4 @@ services:
       APPROVAL_HOST: "approval-service"
     ports:
       - 3000:3000
+

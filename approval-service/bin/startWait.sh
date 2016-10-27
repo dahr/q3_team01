@@ -16,8 +16,9 @@ until [ "$isok" == "imok" ]; do
 done
 
 
-    sleep 30
-
+echo "Sleeping for 60 seconds to allow kafka queues to be created..."
+sleep 60
+ehco "... done."
 
 
 exec $@
