@@ -10,7 +10,7 @@ services:
       - 2181:2181
 
   kafka-service:
-    image: ericsmalling/kafka
+    image: ericsmalling/kafka-docker
     hostname: kafka-service
     container_name: team1-kafka-service
     depends_on:
